@@ -46,8 +46,8 @@ namespace OmanCharts.Controllers
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
         [HttpGet]
-        [Route("GetById")]
-        public async Task<IActionResult> GetById(string UserId)
+        [Route("GetById/{Id}")]
+        public async Task<IActionResult> GetById(string Id)
         {
             var data = await (from u in _context.Users
                               join ur in _context.UserRoles on u.Id equals ur.UserId
@@ -60,7 +60,7 @@ namespace OmanCharts.Controllers
                                   u.PhoneNumber,
                                   roleId = r.Id,
                                   roleName = r.Name,
-                              }).Where(r => r.roleName == UserRoles.Customer && r.Id == UserId).FirstOrDefaultAsync();
+                              }).Where(r => r.roleName == UserRoles.Customer && r.Id == Id).FirstOrDefaultAsync();
 
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }

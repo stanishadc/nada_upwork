@@ -157,7 +157,7 @@ namespace OmanCharts.Migrations
 
             modelBuilder.Entity("OmanCharts.Models.Project", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("ProjectId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -224,6 +224,9 @@ namespace OmanCharts.Migrations
                     b.Property<DateTime>("StartDateContract")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("TimeExtension")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Year")
                         .IsRequired()
                         .HasColumnType("varchar(25)");
@@ -231,17 +234,14 @@ namespace OmanCharts.Migrations
                     b.Property<Guid?>("ZoneId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("timeExtension")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
+                    b.HasKey("ProjectId");
 
                     b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("OmanCharts.Models.Statistic", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("StatisticId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
@@ -274,7 +274,7 @@ namespace OmanCharts.Migrations
                     b.Property<Guid?>("ZoneId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("StatisticId");
 
                     b.ToTable("Statistics");
                 });

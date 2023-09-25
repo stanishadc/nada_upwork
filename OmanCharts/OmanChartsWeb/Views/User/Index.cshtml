@@ -23,7 +23,7 @@
                 <h5 class="card-title mb-0 flex-grow-1">Users List</h5>
                 <div class="flex-shrink-0">
                     <div class="form-check form-switch form-switch-right form-switch-md">
-                        <a asp-area="" asp-controller="User" asp-action="AddUser" class="btn btn-primary">Add User</a>
+                        <a asp-action="Create" class="btn btn-primary">Add User</a>
                     </div>
                 </div>
             </div>
@@ -52,10 +52,10 @@
                                 <td>
                                     <ul class="list-inline hstack gap-2 mb-0">
                                         <li class="list-inline-item">
-                                            <form asp-action="Edit" method="post">
-                                                <input type="hidden" value="@r.Id" name="Id" />
-                                                <button type="submit" class="btn btn-primary">Edit</button>
-                                            </form>
+                                            <a asp-action="Details" class="btn btn-info" asp-route-Id="@r.Id">Details</a>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <a asp-action="Edit" class="btn btn-primary" asp-route-Id="@r.Id">Edit</a>
                                         </li>
                                         <li>
                                             <form asp-action="Delete" method="post">

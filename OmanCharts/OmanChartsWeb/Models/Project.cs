@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace OmanChartsWeb.Models
 {
@@ -9,6 +10,7 @@ namespace OmanChartsWeb.Models
         public string? ProjectNumber { get; set; }
         public string? ProjectName { get; set; }
         public Guid? ZoneId { get; set; }
+        public string? ZoneName { get; set; }
         public string? ProjectCategory { get; set; }
         public string? Year { get; set; }
         public string? FinanceEntity { get; set; }
@@ -19,7 +21,7 @@ namespace OmanChartsWeb.Models
         public DateTime StartDateContract { get; set; }
         public DateTime EndDateContract { get; set; }
         public DateTime CompletionDate { get; set; }
-        public DateTime timeExtension { get; set; }
+        public DateTime TimeExtension { get; set; }
         public double? Cost { get; set; }
         public double? IdentifiedCost { get; set; }
         public double? Expenses { get; set; }
@@ -27,5 +29,6 @@ namespace OmanChartsWeb.Models
         public double? ChangeRequestCost { get; set; }
         public string? RequiredAction { get; set; }
         public string? Challenges { get; set; }
+        public List<SelectListItem> ListofZones { get; set; }
     }
 }

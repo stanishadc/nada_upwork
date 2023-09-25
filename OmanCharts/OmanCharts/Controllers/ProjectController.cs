@@ -21,9 +21,63 @@ namespace OmanCharts.Controllers
                               join z in _context.Zones on p.ZoneId equals z.ZoneId
                               select new
                               {
-                                  p,
+                                  p.ProjectId,
+                                  p.ProjectNumber,
+                                  p.ProjectName,
+                                  p.ProjectPeriod,
+                                  p.Year,
+                                  p.StartDateContract,
+                                  p.EndDateContract,
+                                  p.Challenges,
+                                  p.ChangeRequestCost,
+                                  p.CompletionDate,
+                                  p.Consultant,
+                                  p.Contractor,
+                                  p.Cost,
+                                  p.Expenses,
+                                  p.FinanceEntity,
+                                  p.IdentifiedCost,
+                                  p.Progress,
+                                  p.ProjectCategory,
+                                  p.RemainingCost,
+                                  p.RequiredAction,
+                                  p.TimeExtension,
+                                  z.ZoneId,
                                   z.ZoneName
                               }).ToListAsync();
+            return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
+        }
+        [HttpGet]
+        [Route("GetById/{Id}")]
+        public async Task<IActionResult> GetById(Guid Id)
+        {
+            var data = await (from p in _context.Projects
+                              join z in _context.Zones on p.ZoneId equals z.ZoneId
+                              select new
+                              {
+                                  p.ProjectId,
+                                  p.ProjectName,
+                                  p.ProjectNumber,
+                                  p.ProjectPeriod,
+                                  p.Year,
+                                  p.StartDateContract, p.EndDateContract,
+                                  p.Challenges,
+                                  p.ChangeRequestCost,
+                                  p.CompletionDate,
+                                  p.Consultant,
+                                  p.Contractor,
+                                  p.Cost,
+                                  p.Expenses,
+                                  p.FinanceEntity,
+                                  p.IdentifiedCost,
+                                  p.Progress,
+                                  p.ProjectCategory,
+                                  p.RemainingCost,
+                                  p.RequiredAction,
+                                  p.TimeExtension,                                  
+                                  z.ZoneId,
+                                  z.ZoneName
+                              }).Where(z => z.ProjectId == Id).FirstOrDefaultAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
         [HttpGet]
@@ -34,7 +88,27 @@ namespace OmanCharts.Controllers
                               join z in _context.Zones on p.ZoneId equals z.ZoneId
                               select new
                               {
-                                  p,
+                                  p.ProjectId,
+                                  p.ProjectNumber,
+                                  p.ProjectName,
+                                  p.ProjectPeriod,
+                                  p.Year,
+                                  p.StartDateContract,
+                                  p.EndDateContract,
+                                  p.Challenges,
+                                  p.ChangeRequestCost,
+                                  p.CompletionDate,
+                                  p.Consultant,
+                                  p.Contractor,
+                                  p.Cost,
+                                  p.Expenses,
+                                  p.FinanceEntity,
+                                  p.IdentifiedCost,
+                                  p.Progress,
+                                  p.ProjectCategory,
+                                  p.RemainingCost,
+                                  p.RequiredAction,
+                                  p.TimeExtension,
                                   z.ZoneId,
                                   z.ZoneName
                               }).Where(z => z.ZoneId == ZoneId).ToListAsync();
@@ -62,7 +136,7 @@ namespace OmanCharts.Controllers
         {
             try
             {
-                var data = await _context.Projects.Where(z => z.ProjectId == model.ProjectId).FirstOrDefaultAsync();
+                var data = await _context.Projects.Where(z => z.ProjectId == model.ProjectId).AsNoTracking().FirstOrDefaultAsync();
                 if (data == null)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Record not exists!" });
@@ -70,6 +144,7 @@ namespace OmanCharts.Controllers
                 else
                 {
                     data = model;
+                    _context.Entry(data).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
                     return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Record Updated Successfully" });
                 }

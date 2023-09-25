@@ -1,0 +1,162 @@
+﻿@model Project
+@{
+    ViewData["Title"] = "Project Details";
+}
+
+<div class="container p-3 my-3 border">
+    <h4>Project Details</h4>
+    <hr />
+    <form asp-action="Create">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectNumber" class="form-label">ProjectNumber : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ProjectNumber)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectName" class="form-label">Project Name : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ProjectName)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="zoneId" class="form-label">Zone : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ZoneName)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectCategory" class="form-label">Project Category : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ProjectCategory)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="year" class="form-label">Year : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Year)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="financeEntity" class="form-label">FinanceEntity : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.FinanceEntity)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="contractor" class="form-label">Contractor : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Contractor)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="consultant" class="form-label">Consultant : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Consultant)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="progress" class="form-label">Progress : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Progress)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectPeriod" class="form-label">ProjectPeriod : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ProjectPeriod)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="startDateContract" class="form-label">StartDateContract : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.StartDateContract)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="endDateContract" class="form-label">EndDateContract : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.EndDateContract)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="completionDate" class="form-label">CompletionDate : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.CompletionDate)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="timeExtension" class="form-label">TimeExtension : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.TimeExtension)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="cost" class="form-label">Cost : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Cost)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="identifiedCost" class="form-label">IdentifiedCost : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.IdentifiedCost)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="expenses" class="form-label">Expenses : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Expenses)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="remainingCost" class="form-label">RemainingCost : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.RemainingCost)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="changeRequestCost" class="form-label">ChangeRequestCost : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ChangeRequestCost)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="requiredAction" class="form-label">RequiredAction : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.RequiredAction)</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mb-3">
+                    <label htmlFor="challenges" class="form-label">Challenges : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Challenges)</label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-danger" asp-action="Index">Back</a>
+        </div>
+    </form>
+</div>

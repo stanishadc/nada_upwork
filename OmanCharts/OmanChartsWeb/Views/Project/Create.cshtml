@@ -1,0 +1,146 @@
+﻿@model Project
+@{
+    ViewData["Title"] = "Create Project";
+}
+
+<div class="container p-3 my-3 border">
+    <h4>Create Project</h4>
+    <hr />
+    <form asp-action="Create">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectNumber" class="form-label">ProjectNumber : </label>
+                    <input type="text" name="projectNumber" class="form-control" placeholder="ProjectNumber" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectName" class="form-label">Project Name : </label>
+                    <input type="text" name="projectName" class="form-control" placeholder="Project Name" />
+                </div>
+            </div>        
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="zoneId" class="form-label">Zone Id : </label>
+                    <select asp-for="ZoneId"
+                            class="form-control"
+                            asp-items="@(new SelectList(Model.ListofZones,"Value", "Text"))">
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectCategory" class="form-label">Project Category : </label>
+                    <input type="text" name="projectCategory" class="form-control" placeholder="Project Category" />
+                </div>
+            </div>        
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="year" class="form-label">Year : </label>
+                    <input type="text" name="year" class="form-control" placeholder="Year" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="financeEntity" class="form-label">FinanceEntity : </label>
+                    <input type="text" name="financeEntity" class="form-control" placeholder="Finance Entity" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="contractor" class="form-label">Contractor : </label>
+                    <input type="text" name="contractor" class="form-control" placeholder="Contractor" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="consultant" class="form-label">Consultant : </label>
+                    <input type="text" name="consultant" class="form-control" placeholder="Consultant" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="progress" class="form-label">Progress : </label>
+                    <input type="text" name="progress" class="form-control" placeholder="Progress" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectPeriod" class="form-label">ProjectPeriod : </label>
+                    <input type="text" name="projectPeriod" class="form-control" placeholder="Project Period" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="startDateContract" class="form-label">StartDateContract : </label>
+                    <input type="date" name="startDateContract" class="form-control" placeholder="StartDate Contract" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="endDateContract" class="form-label">EndDateContract : </label>
+                    <input type="date" name="endDateContract" class="form-control" placeholder="EndDate Contract" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="completionDate" class="form-label">CompletionDate : </label>
+                    <input type="date" name="completionDate" class="form-control" placeholder="Completion Date" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="timeExtension" class="form-label">TimeExtension : </label>
+                    <input type="date" name="timeExtension" class="form-control" placeholder="Time Extension" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="cost" class="form-label">Cost : </label>
+                    <input type="number" name="cost" class="form-control" placeholder="Cost" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="identifiedCost" class="form-label">IdentifiedCost : </label>
+                    <input type="number" name="identifiedCost" class="form-control" placeholder="Identified Cost" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="expenses" class="form-label">Expenses : </label>
+                    <input type="number" name="expenses" class="form-control" placeholder="Expenses" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="remainingCost" class="form-label">RemainingCost : </label>
+                    <input type="number" name="remainingCost" class="form-control" placeholder="Remaining Cost" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="changeRequestCost" class="form-label">ChangeRequestCost : </label>
+                    <input type="number" name="changeRequestCost" class="form-control" placeholder="Change Request Cost" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="requiredAction" class="form-label">Required Action : </label>
+                    <input type="text" name="requiredAction" class="form-control" placeholder="Required Action" />
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="mb-3">
+                    <label htmlFor="challenges" class="form-label">Challenges : </label>
+                    <input type="text" name="challenges" class="form-control" placeholder="Challenges" />
+                </div>
+            </div>
+        </div>
+        <div>
+            <input class="btn btn-primary" type="submit" value="Create" />
+            <a class="btn btn-danger" asp-action="Index">Back</a>
+        </div>
+    </form>
+</div>

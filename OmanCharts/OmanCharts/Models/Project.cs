@@ -39,7 +39,7 @@ namespace OmanCharts.Models
         public DateTime StartDateContract { get; set; }
         public DateTime EndDateContract { get; set; }
         public DateTime CompletionDate { get; set; }
-        public DateTime timeExtension { get; set; }
+        public DateTime TimeExtension { get; set; }
 
         public double? Cost { get; set; }
         public double? IdentifiedCost { get; set; }

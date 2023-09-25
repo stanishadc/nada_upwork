@@ -1,0 +1,39 @@
+﻿@model Register
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="container p-3 my-3 border">
+    <h4>Create User</h4>
+    <hr />
+    <form asp-action="Create">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="fullName" class="form-label">Full Name : </label>
+                    <input type="text" name="fullName" class="form-control" placeholder="Full Name" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="zoneName" class="form-label">Email : </label>
+                    <input type="text" name="email" class="form-control" placeholder="Email" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="phoneNumber" class="form-label">Phone No : </label>
+                    <input type="text" name="phoneNumber" class="form-control" placeholder="Phone Number" />
+                </div>
+            </div>
+        </div>
+        <div>
+            <input class="btn btn-primary" type="submit" value="Create" />
+            <a class="btn btn-danger" asp-action="Index">Back</a>
+        </div>
+    </form>
+</div>
