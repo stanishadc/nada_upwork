@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34003.232
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmanCharts", "OmanCharts\OmanCharts.csproj", "{FE396DA9-0B2C-43CA-9C42-FA6FC6A22265}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OmanChartsWeb", "OmanChartsWeb\OmanChartsWeb.csproj", "{C9F00C01-6088-41B4-919B-A5BA493B2E2B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FE396DA9-0B2C-43CA-9C42-FA6FC6A22265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE396DA9-0B2C-43CA-9C42-FA6FC6A22265}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE396DA9-0B2C-43CA-9C42-FA6FC6A22265}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE396DA9-0B2C-43CA-9C42-FA6FC6A22265}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9F00C01-6088-41B4-919B-A5BA493B2E2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9F00C01-6088-41B4-919B-A5BA493B2E2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9F00C01-6088-41B4-919B-A5BA493B2E2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9F00C01-6088-41B4-919B-A5BA493B2E2B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4C02A4B6-4717-4F0D-BFDB-5BEA036C3932}
+	EndGlobalSection
+EndGlobal

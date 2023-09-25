@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Zone>
+
+@{
+    ViewData["Title"] = "All Zones";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Zones</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><Link>Home</li>
+                    <li class="breadcrumb-item active">Zones</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="alert alert-success">
+    <form asp-action="AddZone" method="post">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="zoneName" class="form-label">Zone Name</label>
+                    <input type="text" name="zoneName" class="form-control" placeholder="Zone Name" />
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="hstack gap-2 justify-content-end mb-3 mt-4">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Zones List</h5>
+            </div>
+            <div class="card-body">
+                <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>SNo.</th>
+                            <th>Zone Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            int i = 1;
+                        }
+                        @foreach (var r in Model)
+                        {
+                        <tr>
+                            <td>@i</td>
+                            <td>@r.ZoneName</td>
+                            <td>
+                                <ul class="list-inline hstack gap-2 mb-0">
+                                    <li class="list-inline-item">
+                                            <form asp-action="UpdateZone" method="post">
+                                                <input type="hidden" value="@r.ZoneId" name="ZoneId" />
+                                            <button type="submit" class="btn btn-primary">Edit</button>
+                                            </form>
+                                        </li>
+                                    <li>
+                                            <form asp-action="DeleteZone" method="post">
+                                                <input type="hidden" value="@r.ZoneId" name="ZoneId" />
+                                                <button type="submit" class="btn btn-danger">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
