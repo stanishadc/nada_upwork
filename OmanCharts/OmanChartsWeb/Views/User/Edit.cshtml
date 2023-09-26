@@ -2,7 +2,30 @@
 @{
     ViewData["Title"] = "Create User";
 }
-
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor httpContextAccessor
+    string role = httpContextAccessor.HttpContext.Session.GetString("Role");
+    if (!string.IsNullOrEmpty(role))
+    {
+        if (role.ToString() == "Admin")
+        {
+            Layout = "_Layout";
+        }
+        else if (role.ToString() == "Customer")
+        {
+            Layout = "_UserLayout";
+        }
+        else
+        {
+            Layout = "_LoginLayout";
+        }
+    }
+    else
+    {
+        Layout = "_LoginLayout";
+    }
+}
 <div class="container p-3 my-3 border">
     <h4>Create User</h4>
     <hr />

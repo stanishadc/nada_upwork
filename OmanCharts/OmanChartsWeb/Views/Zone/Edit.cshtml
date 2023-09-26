@@ -1,0 +1,47 @@
+﻿@model Zone
+@{
+    ViewData["Title"] = "Update Zone";
+}
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor httpContextAccessor
+    string role = httpContextAccessor.HttpContext.Session.GetString("Role");
+    if (!string.IsNullOrEmpty(role))
+    {
+        if (role.ToString() == "Admin")
+        {
+            Layout = "_Layout";
+        }
+        else if (role.ToString() == "Customer")
+        {
+            Layout = "_UserLayout";
+        }
+        else
+        {
+            Layout = "_LoginLayout";
+        }
+    }
+    else
+    {
+        Layout = "_LoginLayout";
+    }
+}
+<div class="container p-3 my-3 border">
+    <h4>Update Zone</h4>
+    <hr />
+    <form asp-action="Update">
+        <input type="hidden" asp-for="ZoneId" />
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="zoneName" class="form-label">ZoneName : </label>
+                    <input type="text" name="zoneName" asp-for="ZoneName" class=" form-control" placeholder="Zone Name" />
+                </div>
+            </div>
+        </div>
+        <div>
+            <input class="btn btn-primary" type="submit" value="Update" />
+            <a class="btn btn-danger" asp-action="Index">Back</a>
+        </div>
+    </form>
+</div>

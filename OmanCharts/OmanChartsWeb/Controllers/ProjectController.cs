@@ -11,6 +11,11 @@ namespace OmanChartsWeb.Controllers
     {
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("Role") == null)
+            {
+                var routeValue = new RouteValueDictionary(new { action = "Index", controller = "Home" });
+                return RedirectToRoute(routeValue);
+            }
             List<Project> lists = new List<Project>();
             using (var httpClient = new HttpClient())
             {
@@ -129,7 +134,7 @@ namespace OmanChartsWeb.Controllers
         {
             using (var httpClient = new HttpClient())
             {
-                using (var response = await httpClient.DeleteAsync("https://localhost:7089/api/Project?Id=" + Id))
+                using (var response = await httpClient.DeleteAsync("https://localhost:7089/api/Project/Delete?Id=" + Id))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     var data = JsonConvert.DeserializeObject<Response>(apiResponse);

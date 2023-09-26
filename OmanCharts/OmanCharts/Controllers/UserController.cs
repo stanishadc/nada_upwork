@@ -33,6 +33,7 @@ namespace OmanCharts.Controllers
             var data = await (from u in _context.Users
                               join ur in _context.UserRoles on u.Id equals ur.UserId
                               join r in _context.Roles on ur.RoleId equals r.Id
+                              join z in _context.Zones on u.ZoneId equals z.ZoneId
                               select new
                               {
                                   u.Id,
@@ -41,6 +42,8 @@ namespace OmanCharts.Controllers
                                   u.PhoneNumber,
                                   roleId = r.Id,
                                   roleName = r.Name,
+                                  zoneId = z.ZoneId,
+                                  zoneName=z.ZoneName
                               }).Where(r => r.roleName == UserRoles.Customer).ToListAsync();
 
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
@@ -52,6 +55,7 @@ namespace OmanCharts.Controllers
             var data = await (from u in _context.Users
                               join ur in _context.UserRoles on u.Id equals ur.UserId
                               join r in _context.Roles on ur.RoleId equals r.Id
+                              join z in _context.Zones on u.ZoneId equals z.ZoneId
                               select new
                               {
                                   u.Id,
@@ -60,14 +64,17 @@ namespace OmanCharts.Controllers
                                   u.PhoneNumber,
                                   roleId = r.Id,
                                   roleName = r.Name,
+                                  zoneId = z.ZoneId,
+                                  zoneName = z.ZoneName
                               }).Where(r => r.roleName == UserRoles.Customer && r.Id == Id).FirstOrDefaultAsync();
 
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromForm] Login model)
+        public async Task<IActionResult> Login(Login model)
         {
+            LoginResponse loginResponse = new LoginResponse();
             var user = await _userManager.FindByEmailAsync(model.Username);
             if (user != null)
             {
@@ -89,28 +96,27 @@ namespace OmanCharts.Controllers
                     var roleName = userRoles.FirstOrDefault();
                     if (roleName == UserRoles.Customer)
                     {
-                        return Ok(new
-                        {
-                            token = new JwtSecurityTokenHandler().WriteToken(token),
-                            expiration = token.ValidTo,
-                            userId = user.Id,
-                            role = roleName,
-                            zoneId = user.ZoneId
-                        });
+                        loginResponse.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                        loginResponse.Expiration = token.ValidTo;
+                        loginResponse.UserId = user.Id;
+                        loginResponse.Role = roleName;
+                        loginResponse.ZoneId = user.ZoneId;
+                        loginResponse.Status = true;
+                        return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = loginResponse });
                     }
                     else
                     {
-                        return Ok(new
-                        {
-                            token = new JwtSecurityTokenHandler().WriteToken(token),
-                            expiration = token.ValidTo,
-                            userId = user.Id,
-                            role = roleName
-                        });
+                        loginResponse.Token = new JwtSecurityTokenHandler().WriteToken(token);
+                        loginResponse.Expiration = token.ValidTo;
+                        loginResponse.UserId = user.Id;
+                        loginResponse.Role = roleName;
+                        loginResponse.Status = true;
+                        return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = loginResponse });
                     }
                 }
                 else
                 {
+                    loginResponse.Status = false;
                     return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = "Please check the credentials!" });
                 }
             }

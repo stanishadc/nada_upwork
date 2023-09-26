@@ -25,6 +25,18 @@ namespace OmanCharts.Controllers
                               }).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
+        [HttpGet]
+        [Route("GetById/{Id}")]
+        public async Task<IActionResult> GetById(Guid Id)
+        {
+            var data = await (from bs in _context.Zones
+                              select new
+                              {
+                                  bs.ZoneId,
+                                  bs.ZoneName
+                              }).Where(z => z.ZoneId == Id).FirstOrDefaultAsync();
+            return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
+        }
         [HttpPost]
         [Route("Insert")]
         public IActionResult Insert(Zone model)
@@ -47,14 +59,15 @@ namespace OmanCharts.Controllers
         {
             try
             {
-                var data = await _context.Zones.Where(z => z.ZoneId == model.ZoneId).FirstOrDefaultAsync();
+                var data = await _context.Zones.Where(z => z.ZoneId == model.ZoneId).AsNoTracking().FirstOrDefaultAsync();
                 if (data == null)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Record not exists!" });
                 }
                 else
                 {
-                    data.ZoneName = model.ZoneName;
+                    data = model;
+                    _context.Entry(data).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
                     return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Record Updated Successfully" });
                 }

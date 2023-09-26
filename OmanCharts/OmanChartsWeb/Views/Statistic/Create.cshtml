@@ -1,0 +1,91 @@
+﻿@model Statistic
+@{
+    ViewData["Title"] = "Create Statistics";
+}
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor httpContextAccessor
+    string role = httpContextAccessor.HttpContext.Session.GetString("Role");
+    if (!string.IsNullOrEmpty(role))
+    {
+        if (role.ToString() == "Admin")
+        {
+            Layout = "_Layout";
+        }
+        else if (role.ToString() == "Customer")
+        {
+            Layout = "_UserLayout";
+        }
+        else
+        {
+            Layout = "_LoginLayout";
+        }
+    }
+    else
+    {
+        Layout = "_LoginLayout";
+    }
+}
+<div class="container p-3 my-3 border">
+    <h4>Create Statistics</h4>
+    <hr />
+    <form asp-action="Create">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="omanizationRate" class="form-label">Omanization Rate : </label>
+                    <input type="number" name="omanizationRate" class="form-control" placeholder="OmanizationRate" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="totalLabour" class="form-label">Total Labour : </label>
+                    <input type="number" name="totalLabour" class="form-control" placeholder="Total Labour" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="investments" class="form-label">Investments : </label>
+                    <input type="number" name="investments" class="form-control" placeholder="Investments" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="totalInvestors" class="form-label">Total Investors : </label>
+                    <input type="number" name="totalInvestors" class="form-control" placeholder="Total Investors" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="totalProjects" class="form-label">Total Projects : </label>
+                    <input type="number" name="totalProjects" class="form-control" placeholder="Total Projects" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="zoneId" class="form-label">Zone : </label>
+                    <select asp-for="ZoneId"
+                            class="form-control"
+                            asp-items="@(new SelectList(Model.ListofZones,"Value", "Text"))">
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectCategory" class="form-label">Project Category : </label>
+                    <input type="text" name="projectCategory" class="form-control" placeholder="Project Category" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="year" class="form-label">Year : </label>
+                    <input type="text" name="year" class="form-control" placeholder="Year" />
+                </div>
+            </div>
+        </div>
+        <div>
+            <input class="btn btn-primary" type="submit" value="Create" />
+            <a class="btn btn-danger" asp-action="Index">Back</a>
+        </div>
+    </form>
+</div>

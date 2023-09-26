@@ -11,6 +11,11 @@ namespace OmanChartsWeb.Controllers
     {
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("Role") == null)
+            {
+                var routeValue = new RouteValueDictionary(new { action = "Index", controller = "Home" });
+                return RedirectToRoute(routeValue);
+            }
             List<Zone> ZonesList = new List<Zone>();
             using (var httpClient = new HttpClient())
             {
@@ -23,6 +28,40 @@ namespace OmanChartsWeb.Controllers
                 }
             }
             return View(ZonesList);
+        }
+        public async Task<IActionResult> Update(Zone zone)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                StringContent content = new StringContent(JsonConvert.SerializeObject(zone), Encoding.UTF8, "application/json");
+
+                using (var response = await httpClient.PutAsync("https://localhost:7089/api/Zone/Update", content))
+                {
+                    string apiResponse = await response.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject<Response>(apiResponse);
+                }
+            }
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            using (var httpClient = new HttpClient())
+            {
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Zone/GetById/" + Id))
+                {
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
+                    var jObject = JsonConvert.DeserializeObject<Response>(apiData);
+                    var jObject1 = JObject.Parse(apiData);
+                    var bids = jObject1["data"].ToString();
+                    var data = JsonConvert.DeserializeObject<Zone>(bids);
+                    return View(data);
+                }
+            }
         }
         [HttpPost]
         public async Task<IActionResult> AddZone(Zone zone)

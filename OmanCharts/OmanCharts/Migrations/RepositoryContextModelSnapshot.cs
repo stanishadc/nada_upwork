@@ -256,7 +256,7 @@ namespace OmanCharts.Migrations
 
                     b.Property<string>("ProjectCategory")
                         .IsRequired()
-                        .HasColumnType("varchar(4)");
+                        .HasColumnType("varchar(45)");
 
                     b.Property<double?>("TotalInvestors")
                         .HasColumnType("float");
@@ -276,7 +276,7 @@ namespace OmanCharts.Migrations
 
                     b.HasKey("StatisticId");
 
-                    b.ToTable("Statistics");
+                    b.ToTable("tblStatistics");
                 });
 
             modelBuilder.Entity("OmanCharts.Models.User", b =>

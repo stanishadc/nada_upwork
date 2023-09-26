@@ -1,0 +1,87 @@
+﻿@model Statistic
+@{
+    ViewData["Title"] = "Statistics";
+}
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor httpContextAccessor
+    string role = httpContextAccessor.HttpContext.Session.GetString("Role");
+    if (!string.IsNullOrEmpty(role))
+    {
+        if (role.ToString() == "Admin")
+        {
+            Layout = "_Layout";
+        }
+        else if (role.ToString() == "Customer")
+        {
+            Layout = "_UserLayout";
+        }
+        else
+        {
+            Layout = "_LoginLayout";
+        }
+    }
+    else
+    {
+        Layout = "_LoginLayout";
+    }
+}
+<div class="container p-3 my-3 border">
+    <h4>Details Statistics</h4>
+    <hr />
+    <form asp-action="Details">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="omanizationRate" class="form-label">Omanization Rate : </label>
+                    <label htmlFor="omanizationRate" class="form-label">@Html.DisplayFor(model => model.OmanizationRate)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="totalLabour" class="form-label">Total Labour : </label>
+                    <label htmlFor="totalLabour" class="form-label">@Html.DisplayFor(model => model.TotalLabour)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="investments" class="form-label">Investments : </label>
+                    <label htmlFor="investments" class="form-label">@Html.DisplayFor(model => model.Investments)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="totalInvestors" class="form-label">Total Investors : </label>
+                    <label htmlFor="totalInvestors" class="form-label">@Html.DisplayFor(model => model.TotalInvestors)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="totalProjects" class="form-label">Total Projects : </label>
+                    <label htmlFor="totalProjects" class="form-label">@Html.DisplayFor(model => model.TotalProjects)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="zoneName" class="form-label">Zone : </label>
+                    <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ZoneName)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="projectCategory" class="form-label">Project Category : </label>
+                    <label htmlFor="projectCategory" class="form-label">@Html.DisplayFor(model => model.ProjectCategory)</label>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="year" class="form-label">Year : </label>
+                    <label htmlFor="year" class="form-label">@Html.DisplayFor(model => model.Year)</label>
+                </div>
+            </div>
+        </div>
+        <div>
+            <a class="btn btn-danger" asp-action="Index">Back</a>
+        </div>
+    </form>
+</div>

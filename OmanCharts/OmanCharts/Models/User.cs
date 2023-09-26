@@ -17,6 +17,15 @@ namespace OmanCharts.Models
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
     }
+    public class LoginResponse
+    {
+        public string? Token { get; set; }
+        public DateTime? Expiration { get; set; }
+        public string? UserId { get; set; }
+        public Guid? ZoneId { get; set; }
+        public string? Role { get; set; }
+        public bool Status { get; set; }
+    }
     public class Register
     {
         [Required(ErrorMessage = "Email is required")]

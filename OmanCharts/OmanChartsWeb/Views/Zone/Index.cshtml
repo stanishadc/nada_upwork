@@ -1,7 +1,31 @@
 ﻿@model IEnumerable<Zone>
 
 @{
-    ViewData["Title"] = "All Zones";
+    ViewData["Title"] = "Zones";
+}
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor httpContextAccessor
+    string role = httpContextAccessor.HttpContext.Session.GetString("Role");
+    if (!string.IsNullOrEmpty(role))
+    {
+        if (role.ToString() == "Admin")
+        {
+            Layout = "_Layout";
+        }
+        else if (role.ToString() == "Customer")
+        {
+            Layout = "_UserLayout";
+        }
+        else
+        {
+            Layout = "_LoginLayout";
+        }
+    }
+    else
+    {
+        Layout = "_LoginLayout";
+    }
 }
 <div class="row">
     <div class="col-12">
@@ -24,7 +48,7 @@
                     <label htmlFor="zoneName" class="form-label">Zone Name</label>
                     <input type="text" name="zoneName" class="form-control" placeholder="Zone Name" />
                 </div>
-            </div>
+            </div>            
             <div class="col-lg-2">
                 <div class="hstack gap-2 justify-content-end mb-3 mt-4">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -55,28 +79,23 @@
                         }
                         @foreach (var r in Model)
                         {
-                        <tr>
-                            <td>@i</td>
-                            <td>@r.ZoneName</td>
-                            <td>
-                                <ul class="list-inline hstack gap-2 mb-0">
-                                    <li class="list-inline-item">
-                                            <form asp-action="UpdateZone" method="post">
-                                                <input type="hidden" value="@r.ZoneId" name="ZoneId" />
-                                            <button type="submit" class="btn btn-primary">Edit</button>
-                                            </form>
-                                        </li>
-                                    <li>
+                            <tr>
+                                <td>@i</td>
+                                <td>@r.ZoneName</td>
+                                <td>
+                                    <ul class="list-inline hstack gap-2 mb-0">
+                                        <a asp-action="Edit" class="btn btn-primary" asp-route-Id="@r.ZoneId">Edit</a>
+                                        <li>
                                             <form asp-action="DeleteZone" method="post">
                                                 <input type="hidden" value="@r.ZoneId" name="ZoneId" />
                                                 <button type="submit" class="btn btn-danger">
                                                     Delete
                                                 </button>
                                             </form>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
+                                        </li>
+                                    </ul>
+                                </td>
+                            </tr>
                             i++;
                         }
                     </tbody>

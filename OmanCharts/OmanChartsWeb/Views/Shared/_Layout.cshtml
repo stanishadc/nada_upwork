@@ -37,12 +37,12 @@
 </head>
 <body>
     <div id="layout-wrapper">
-    <header id="page-topbar">
-        <div class="layout-width">
-            <div class="navbar-header">
+        <header id="page-topbar">
+            <div class="layout-width">
+                <div class="navbar-header">
+                </div>
             </div>
-        </div>
-    </header>
+        </header>
         <!-- ========== App Menu ========== -->
         <div class="app-menu navbar-menu">
             <!-- LOGO -->
@@ -61,7 +61,7 @@
                     <ul class="navbar-nav" id="navbar-nav">
                         <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                         <li class="nav-item">
-                            <a class="nav-link menu-link" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="nav-link menu-link" asp-area="" asp-controller="Dashboard" asp-action="Index">
                                 <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboard</span>
                             </a>
                         </li>
@@ -85,6 +85,11 @@
                                 <i class=" ri-file-user-line"></i> <span data-key="t-dashboards">Users</span>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link menu-link" asp-area="" asp-controller="Home" asp-action="Logout">
+                                <i class="ri-bar-chart-2-line"></i> <span data-key="t-dashboards">Logout</span>
+                            </a>
+                        </li>
                     </ul>
                 </div>
                 <!-- Sidebar -->
@@ -96,15 +101,15 @@
         <div class="main-content">
             <div class="page-content">
                 <div class="container-fluid">
-                                @RenderBody()
+                    @RenderBody()
                 </div>
             </div>
         </div>
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - OmanChartsWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2023 - OmanChartsWeb
+            </div>
+        </footer>
     </div>
     <!--start back-to-top-->
     <button onclick="topFunction()" class="btn btn-danger btn-icon" id="back-to-top">

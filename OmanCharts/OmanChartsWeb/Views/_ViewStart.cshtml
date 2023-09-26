@@ -1,3 +1,21 @@
 ﻿@{
-    Layout = "_Layout";
+    if (TempData["role"] != null)
+    {
+        if (TempData["role"]=="Admin")
+        {
+            Layout = "_Layout";
+        }
+        else if (TempData["role"]=="Customer")
+        {
+            Layout = "_UserLayout";
+        }
+        else
+        {
+            Layout = "_LoginLayout";
+        }
+    }
+    else
+    {
+        Layout = "_LoginLayout";
+    }
 }

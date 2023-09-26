@@ -2,10 +2,41 @@
 @{
     ViewData["Title"] = "Details";
 }
-
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor httpContextAccessor
+    string role = httpContextAccessor.HttpContext.Session.GetString("Role");
+    if (!string.IsNullOrEmpty(role))
+    {
+        if (role.ToString() == "Admin")
+        {
+            Layout = "_Layout";
+        }
+        else if (role.ToString() == "Customer")
+        {
+            Layout = "_UserLayout";
+        }
+        else
+        {
+            Layout = "_LoginLayout";
+        }
+    }
+    else
+    {
+        Layout = "_LoginLayout";
+    }
+}
 <div class="container p-3 my-3 border">
     <h4>User Details</h4>
     <hr />
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="mb-3">
+                <label htmlFor="zoneName" class="form-label">Zone Name : </label>
+                <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ZoneName)</label>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-3">
             <div class="mb-3">
@@ -13,15 +44,15 @@
                 <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.FullName)</label>
             </div>
         </div>
-        </div>
-        <div class="row">
+    </div>
+    <div class="row">
         <div class="col-lg-3">
             <div class="mb-3">
                 <label htmlFor="zoneName" class="form-label">Email : </label>
                 <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Email)</label>
             </div>
         </div>
-        </div>
+    </div>
     <div class="row">
         <div class="col-lg-3">
             <div class="mb-3">
@@ -29,15 +60,15 @@
                 <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.PhoneNumber)</label>
             </div>
         </div>
-        </div>
-        <div class="row">
+    </div>
+    <div class="row">
         <div class="col-lg-3">
             <div class="mb-3">
                 <label htmlFor="zoneName" class="form-label">User Name : </label>
                 <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Email)</label>
             </div>
         </div>
-     </div>
+    </div>
     <div>
         <a class="btn btn-danger" asp-action="Index">Back</a>
     </div>

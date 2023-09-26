@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OmanChartsWeb.Models;
@@ -10,6 +11,11 @@ namespace OmanChartsWeb.Controllers
     {
         public async Task<IActionResult> Index()
         {
+            if (HttpContext.Session.GetString("Role") == null)
+            {
+                var routeValue = new RouteValueDictionary(new { action = "Index", controller = "Home" });
+                return RedirectToRoute(routeValue);
+            }
             List<User> lists = new List<User>();
             using (var httpClient = new HttpClient())
             {
@@ -23,10 +29,35 @@ namespace OmanChartsWeb.Controllers
             }
             return View(lists);
         }
-        [HttpGet]
-        public IActionResult Create()
+        private async Task<List<SelectListItem>> GetZones()
         {
-            return View();
+            List<Zone> ZonesList = new List<Zone>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Zone/Get"))
+                {
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
+                    var jObject = JObject.Parse(apiData);
+                    var bids = JArray.Parse(jObject["data"].ToString());
+                    ZonesList = bids.ToObject<List<Zone>>();
+                }
+            }
+            List<SelectListItem> ListofZones = new List<SelectListItem>();
+            for (int i = 0; i < ZonesList.Count; i++)
+            {
+                SelectListItem selectListItem = new SelectListItem();
+                selectListItem.Text = ZonesList[i].ZoneName;
+                selectListItem.Value = ZonesList[i].ZoneId.ToString();
+                ListofZones.Add(selectListItem);
+            }
+            return ListofZones;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            Register register = new Register();
+            register.ListofZones = await GetZones();
+            return View(register);
         }
         [HttpPost]
         public async Task<IActionResult> Create(Register register)
@@ -63,19 +94,25 @@ namespace OmanChartsWeb.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(User user)
+        public async Task<IActionResult> Edit(Guid Id)
         {
+            if (Id == null)
+            {
+                return NotFound();
+            }
             using (var httpClient = new HttpClient())
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
-
-                using (var response = await httpClient.PostAsync("https://localhost:44324/api/User/create-user", content))
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/User/GetById/" + Id))
                 {
-                    string apiResponse = await response.Content.ReadAsStringAsync();
-                    var data = JsonConvert.DeserializeObject<Response>(apiResponse);
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
+                    var jObject = JsonConvert.DeserializeObject<Response>(apiData);
+                    var jObject1 = JObject.Parse(apiData);
+                    var bids = jObject1["data"].ToString();
+                    var data = JsonConvert.DeserializeObject<User>(bids);
+                    data.ListofZones = await GetZones();
+                    return View(data);
                 }
             }
-            return RedirectToAction("Index");
         }
         public IActionResult Edit()
         {

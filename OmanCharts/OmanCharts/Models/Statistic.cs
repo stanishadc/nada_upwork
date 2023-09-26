@@ -17,7 +17,7 @@ namespace OmanCharts.Models
         [Required, Column(TypeName = "varchar(4)")]
         public string? Year { get; set; }
 
-        [Required, Column(TypeName = "varchar(4)")]
+        [Required, Column(TypeName = "varchar(45)")]
         public string? ProjectCategory { get; set; }
 
         public DateTime LastUpdated { get; set; }

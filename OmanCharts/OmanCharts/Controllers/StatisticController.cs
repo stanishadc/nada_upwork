@@ -17,24 +17,63 @@ namespace OmanCharts.Controllers
         [Route("Get")]
         public async Task<IActionResult> Get()
         {
-            var data = await (from p in _context.Statistics
+            var data = await (from p in _context.tblStatistics
                               join z in _context.Zones on p.ZoneId equals z.ZoneId
                               select new
                               {
-                                  p,
+                                  p.StatisticId,
+                                  p.ZoneId,
+                                  p.Year,
+                                  p.TotalLabour,
+                                  p.OmanizationRate,
+                                  p.TotalProjects,
+                                  p.Investments,
+                                  p.TotalInvestors,
+                                  p.ProjectCategory,
+                                  p.LastUpdated,
                                   z.ZoneName
                               }).ToListAsync();
+            return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
+        }
+        [HttpGet]
+        [Route("GetById/{Id}")]
+        public async Task<IActionResult> GetById(Guid Id)
+        {
+            var data = await (from p in _context.tblStatistics
+                              join z in _context.Zones on p.ZoneId equals z.ZoneId
+                              select new
+                              {
+                                  p.StatisticId,
+                                  p.ZoneId,
+                                  p.Year,
+                                  p.TotalLabour,
+                                  p.OmanizationRate,
+                                  p.TotalProjects,
+                                  p.Investments,
+                                  p.TotalInvestors,
+                                  p.ProjectCategory,
+                                  p.LastUpdated,
+                                  z.ZoneName
+                              }).Where(z => z.StatisticId == Id).FirstOrDefaultAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
         [HttpGet]
         [Route("GetByZone")]
         public async Task<IActionResult> GetByZone(Guid ZoneId)
         {
-            var data = await (from p in _context.Statistics
+            var data = await (from p in _context.tblStatistics
                               join z in _context.Zones on p.ZoneId equals z.ZoneId
                               select new
                               {
-                                  p,
+                                  p.StatisticId,
+                                  p.Year,
+                                  p.TotalLabour,
+                                  p.OmanizationRate,
+                                  p.TotalProjects,
+                                  p.Investments,
+                                  p.TotalInvestors,
+                                  p.ProjectCategory,
+                                  p.LastUpdated,
                                   z.ZoneId,
                                   z.ZoneName
                               }).Where(z => z.ZoneId == ZoneId).ToListAsync();
@@ -47,6 +86,7 @@ namespace OmanCharts.Controllers
             try
             {
                 model.StatisticId = Guid.NewGuid();
+                model.LastUpdated=DateTime.UtcNow;
                 _context.Add(model);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Record Created Successfully" });
@@ -62,7 +102,7 @@ namespace OmanCharts.Controllers
         {
             try
             {
-                var data = await _context.Statistics.Where(z => z.StatisticId == model.StatisticId).FirstOrDefaultAsync();
+                var data = await _context.tblStatistics.Where(z => z.StatisticId == model.StatisticId).AsNoTracking().FirstOrDefaultAsync();
                 if (data == null)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Record not exists!" });
@@ -70,6 +110,8 @@ namespace OmanCharts.Controllers
                 else
                 {
                     data = model;
+                    data.LastUpdated = DateTime.UtcNow;
+                    _context.Entry(data).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
                     return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Record Updated Successfully" });
                 }
@@ -85,14 +127,14 @@ namespace OmanCharts.Controllers
         {
             try
             {
-                var data = await _context.Statistics.FindAsync(id);
+                var data = await _context.tblStatistics.FindAsync(id);
                 if (data == null)
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Record not exists!" });
                 }
                 else
                 {
-                    _context.Statistics.Remove(data);
+                    _context.tblStatistics.Remove(data);
                     await _context.SaveChangesAsync();
                     return StatusCode(StatusCodes.Status200OK, new Response { Status = "Error", Message = "Record Deleted!" });
                 }

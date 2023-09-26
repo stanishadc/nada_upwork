@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\OmanCharts"
+    "\\OmanCharts",
+    "\\OmanCharts\\OmanChartsWeb",
+    "\\OmanCharts\\OmanChartsWeb\\Controllers"
   ],
-  "SelectedNode": "\\OmanCharts\\OmanCharts.sln",
+  "SelectedNode": "\\OmanCharts\\OmanChartsWeb\\Controllers\\ZoneController.cs",
   "PreviewInSolutionExplorer": false
 }

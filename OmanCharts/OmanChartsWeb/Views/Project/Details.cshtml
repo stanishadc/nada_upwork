@@ -2,11 +2,34 @@
 @{
     ViewData["Title"] = "Project Details";
 }
-
+@{
+    @using Microsoft.AspNetCore.Http;
+    @inject IHttpContextAccessor httpContextAccessor
+    string role = httpContextAccessor.HttpContext.Session.GetString("Role");
+    if (!string.IsNullOrEmpty(role))
+    {
+        if (role.ToString() == "Admin")
+        {
+            Layout = "_Layout";
+        }
+        else if (role.ToString() == "Customer")
+        {
+            Layout = "_UserLayout";
+        }
+        else
+        {
+            Layout = "_LoginLayout";
+        }
+    }
+    else
+    {
+        Layout = "_LoginLayout";
+    }
+}
 <div class="container p-3 my-3 border">
     <h4>Project Details</h4>
     <hr />
-    <form asp-action="Create">
+    <form asp-action="Details">
         <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
@@ -14,6 +37,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ProjectNumber)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="projectName" class="form-label">Project Name : </label>
@@ -28,6 +53,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ZoneName)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="projectCategory" class="form-label">Project Category : </label>
@@ -42,6 +69,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Year)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="financeEntity" class="form-label">FinanceEntity : </label>
@@ -56,6 +85,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Contractor)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="consultant" class="form-label">Consultant : </label>
@@ -70,6 +101,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Progress)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="projectPeriod" class="form-label">ProjectPeriod : </label>
@@ -84,6 +117,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.StartDateContract)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="endDateContract" class="form-label">EndDateContract : </label>
@@ -98,6 +133,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.CompletionDate)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="timeExtension" class="form-label">TimeExtension : </label>
@@ -112,6 +149,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Cost)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="identifiedCost" class="form-label">IdentifiedCost : </label>
@@ -126,6 +165,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.Expenses)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="remainingCost" class="form-label">RemainingCost : </label>
@@ -140,6 +181,8 @@
                     <label htmlFor="zoneName" class="form-label">@Html.DisplayFor(model => model.ChangeRequestCost)</label>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="requiredAction" class="form-label">RequiredAction : </label>

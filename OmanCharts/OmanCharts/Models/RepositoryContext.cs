@@ -13,7 +13,7 @@ namespace OmanCharts.Models
             base.OnModelCreating(builder);
         }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<Statistic> Statistics { get; set; }
+        public DbSet<Statistic> tblStatistics { get; set; }
         public DbSet<Zone> Zones { get; set; }
     }
 }
