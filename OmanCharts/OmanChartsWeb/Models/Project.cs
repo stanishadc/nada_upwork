@@ -10,6 +10,7 @@ namespace OmanChartsWeb.Models
         public string? ProjectNumber { get; set; }
         public string? ProjectName { get; set; }
         public Guid? ZoneId { get; set; }
+        public Guid? UserId { get; set; }
         public string? ZoneName { get; set; }
         public string? ProjectCategory { get; set; }
         public string? Year { get; set; }

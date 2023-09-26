@@ -62,6 +62,14 @@ namespace OmanChartsWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Statistic statistic)
         {
+            if (HttpContext.Session.GetString("ZoneId") != null)
+            {
+                statistic.ZoneId = Guid.Parse(HttpContext.Session.GetString("ZoneId"));
+            }
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                statistic.UserId = Guid.Parse(HttpContext.Session.GetString("UserId"));
+            }
             using (var httpClient = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(statistic), Encoding.UTF8, "application/json");
@@ -77,6 +85,14 @@ namespace OmanChartsWeb.Controllers
 
         public async Task<IActionResult> Update(Statistic statistic)
         {
+            if (HttpContext.Session.GetString("ZoneId") != null)
+            {
+                statistic.ZoneId = Guid.Parse(HttpContext.Session.GetString("ZoneId"));
+            }
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                statistic.UserId = Guid.Parse(HttpContext.Session.GetString("UserId"));
+            }
             using (var httpClient = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(statistic), Encoding.UTF8, "application/json");

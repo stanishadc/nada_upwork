@@ -83,8 +83,8 @@ namespace OmanCharts.Controllers
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
         [HttpGet]
-        [Route("GetByZone")]
-        public async Task<IActionResult> GetByZone(Guid ZoneId)
+        [Route("GetByUserZone")]
+        public async Task<IActionResult> GetByZone(Guid ZoneId,Guid UserId)
         {
             var data = await (from p in _context.Projects
                               join z in _context.Zones on p.ZoneId equals z.ZoneId
@@ -111,9 +111,10 @@ namespace OmanCharts.Controllers
                                   p.RemainingCost,
                                   p.RequiredAction,
                                   p.TimeExtension,
+                                  p.UserId,
                                   z.ZoneId,
                                   z.ZoneName
-                              }).Where(z => z.ZoneId == ZoneId).ToListAsync();
+                              }).Where(z => z.ZoneId == ZoneId && z.UserId == UserId).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
         [HttpPost]
@@ -181,7 +182,7 @@ namespace OmanCharts.Controllers
         }
         [HttpGet]
         [Route("GetDashboard")]
-        public async Task<IActionResult> GetDashboard()
+        public IActionResult GetDashboard()
         {
             int[] Series = new int[4];
             string[] Labels = new string[4];

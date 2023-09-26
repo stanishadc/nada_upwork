@@ -27,9 +27,17 @@
     }
 }
 <div class="container p-3 my-3 border">
-    <h4>Create User</h4>
+    <h4>Edit User</h4>
     <hr />
     <form asp-action="Create">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="companyName" class="form-label">Company Name : </label>
+                    <input type="text" name="companyName" class="form-control" placeholder="Company Name" />
+                </div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">

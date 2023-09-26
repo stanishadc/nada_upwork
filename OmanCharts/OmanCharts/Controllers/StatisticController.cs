@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OmanCharts.Models;
+using System.Net;
 
 namespace OmanCharts.Controllers
 {
@@ -59,7 +60,7 @@ namespace OmanCharts.Controllers
         }
         [HttpGet]
         [Route("GetByZone")]
-        public async Task<IActionResult> GetByZone(Guid ZoneId)
+        public async Task<IActionResult> GetByZone(Guid ZoneId, Guid UserId)
         {
             var data = await (from p in _context.tblStatistics
                               join z in _context.Zones on p.ZoneId equals z.ZoneId
@@ -74,10 +75,22 @@ namespace OmanCharts.Controllers
                                   p.TotalInvestors,
                                   p.ProjectCategory,
                                   p.LastUpdated,
+                                  p.UserId,
                                   z.ZoneId,
                                   z.ZoneName
-                              }).Where(z => z.ZoneId == ZoneId).ToListAsync();
+                              }).Where(z => z.ZoneId == ZoneId && z.UserId == UserId).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
+        }
+        [HttpGet]
+        [Route("GetUserDashboard/{ZoneId}")]
+        public async Task<IActionResult> GetUserDashboard(Guid ZoneId)
+        {
+            var data = await _context.tblStatistics.Where(s => s.ZoneId == ZoneId).ToListAsync();
+            double totalInvestments = (double)(from num in data select num.Investments).Sum();
+            double totalProjects = (double)(from num in data select num.TotalProjects).Sum();
+            double totalLabour = (double)(from num in data select num.TotalLabour).Sum();
+            double totalInvestors = (double)(from num in data select num.TotalLabour).Sum();
+            return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = totalInvestments, TotalProjects = totalProjects, TotalLabour= totalLabour, TotalInvestors=totalInvestors });
         }
         [HttpPost]
         [Route("Insert")]

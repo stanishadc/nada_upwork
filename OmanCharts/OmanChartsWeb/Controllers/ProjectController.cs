@@ -62,6 +62,15 @@ namespace OmanChartsWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(Project project)
         {
+            if (HttpContext.Session.GetString("ZoneId") != null)
+            {
+                project.ZoneId = Guid.Parse(HttpContext.Session.GetString("ZoneId"));
+            }
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                project.UserId = Guid.Parse(HttpContext.Session.GetString("UserId"));
+            }
+
             using (var httpClient = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(project), Encoding.UTF8, "application/json");
@@ -77,6 +86,14 @@ namespace OmanChartsWeb.Controllers
         
         public async Task<IActionResult> Update(Project project)
         {
+            if (HttpContext.Session.GetString("ZoneId") != null)
+            {
+                project.ZoneId = Guid.Parse(HttpContext.Session.GetString("ZoneId"));
+            }
+            if (HttpContext.Session.GetString("UserId") != null)
+            {
+                project.UserId = Guid.Parse(HttpContext.Session.GetString("UserId"));
+            }
             using (var httpClient = new HttpClient())
             {
                 StringContent content = new StringContent(JsonConvert.SerializeObject(project), Encoding.UTF8, "application/json");

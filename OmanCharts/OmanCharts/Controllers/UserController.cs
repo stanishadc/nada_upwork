@@ -38,6 +38,7 @@ namespace OmanCharts.Controllers
                               {
                                   u.Id,
                                   u.FullName,
+                                  u.CompanyName,
                                   u.Email,
                                   u.PhoneNumber,
                                   roleId = r.Id,
@@ -45,6 +46,22 @@ namespace OmanCharts.Controllers
                                   zoneId = z.ZoneId,
                                   zoneName=z.ZoneName
                               }).Where(r => r.roleName == UserRoles.Customer).ToListAsync();
+
+            return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
+        }
+        [HttpGet("GetLogs")]
+        public async Task<IActionResult> GetLogs()
+        {
+            var data = await (from u in _context.Users
+                              join ur in _context.UserLogins on u.Id equals ur.UserId
+                              select new
+                              {
+                                  u.Id,
+                                  u.FullName,
+                                  u.CompanyName,
+                                  u.Email,
+                                  ur.LoginTime,
+                              }).ToListAsync();
 
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
@@ -60,6 +77,7 @@ namespace OmanCharts.Controllers
                               {
                                   u.Id,
                                   u.FullName,
+                                  u.CompanyName,
                                   u.Email,
                                   u.PhoneNumber,
                                   roleId = r.Id,
@@ -75,7 +93,7 @@ namespace OmanCharts.Controllers
         public async Task<IActionResult> Login(Login model)
         {
             LoginResponse loginResponse = new LoginResponse();
-            var user = await _userManager.FindByEmailAsync(model.Username);
+            var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null)
             {
                 var checkpassword = await _userManager.CheckPasswordAsync(user, model.Password);
@@ -92,7 +110,7 @@ namespace OmanCharts.Controllers
                         authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                     }
                     var token = GetToken(authClaims);
-
+                    await InsertLogin(user.Id);
                     var roleName = userRoles.FirstOrDefault();
                     if (roleName == UserRoles.Customer)
                     {
@@ -125,6 +143,17 @@ namespace OmanCharts.Controllers
                 return StatusCode(StatusCodes.Status401Unauthorized, new Response { Status = "Error", Message = "User not exists!" });
             }
         }
+
+        private async Task<string> InsertLogin(string id)
+        {
+            UserLogin userLogin = new UserLogin();
+            userLogin.UserId = id;
+            userLogin.LoginTime = DateTime.UtcNow;
+            await _context.AddAsync(userLogin);
+            await _context.SaveChangesAsync();
+            return "Success";
+        }
+
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT:Secret"]));
@@ -159,9 +188,10 @@ namespace OmanCharts.Controllers
                     {
                         Email = model.Email,
                         SecurityStamp = Guid.NewGuid().ToString(),
-                        UserName = model.Email,
+                        UserName = model.UserName,
                         PhoneNumber = model.PhoneNumber,
                         FullName = model.FullName,
+                        CompanyName=model.CompanyName,
                         ZoneId = model.ZoneId
                     };
 
@@ -207,9 +237,10 @@ namespace OmanCharts.Controllers
                     {
                         Email = model.Email,
                         SecurityStamp = Guid.NewGuid().ToString(),
-                        UserName = model.Email,
+                        UserName = model.UserName,
                         PhoneNumber = model.PhoneNumber,
                         FullName = model.FullName,
+                        CompanyName = model.CompanyName,
                         ZoneId = model.ZoneId
                     };
 

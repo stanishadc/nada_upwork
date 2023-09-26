@@ -7,13 +7,22 @@ namespace OmanCharts.Models
     public class User : IdentityUser
     {
         public Guid? ZoneId { get; set; }
-        [Column(TypeName = "varchar(25)")]
+        [Column(TypeName = "varchar(45)")]
         public string? FullName { get; set; }
+        [Column(TypeName = "varchar(200)")]
+        public string? CompanyName { get; set; }
+    }
+    public class UserLogin
+    {
+        public Guid? UserLoginId { get; set; }
+        [Column(TypeName = "varchar(50)")]
+        public string? UserId { get; set; }
+        public DateTime? LoginTime { get; set; }
     }
     public class Login
     {
         [Required(ErrorMessage = "User Name is required")]
-        public string? Username { get; set; }
+        public string? UserName { get; set; }
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
     }
@@ -30,9 +39,12 @@ namespace OmanCharts.Models
     {
         [Required(ErrorMessage = "Email is required")]
         public string? Email { get; set; }
+        [Required(ErrorMessage = "UserName is required")]
+        public string? UserName { get; set; }
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
         public string? FullName { get; set; }
+        public string? CompanyName { get; set; }
         public string? PhoneNumber { get; set; }
         public Guid? ZoneId { get; set; }
     }

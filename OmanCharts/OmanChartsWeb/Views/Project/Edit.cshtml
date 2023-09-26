@@ -44,7 +44,7 @@
                     <input type="text" name="projectName" asp-for="ProjectName" class="form-control" placeholder="Project Name" />
                 </div>
             </div>
-            <div class="col-lg-3">
+            @* <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="zoneId" class="form-label">Zone Id : </label>
                     <select asp-for="ZoneId"
@@ -52,7 +52,7 @@
                             asp-items="@(new SelectList(Model.ListofZones,"Value", "Text"))">
                     </select>
                 </div>
-            </div>
+            </div> *@
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="projectCategory" class="form-label">Project Category : </label>

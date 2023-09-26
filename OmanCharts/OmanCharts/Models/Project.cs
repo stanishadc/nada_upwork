@@ -6,14 +6,14 @@ namespace OmanCharts.Models
     public class Project
     {
         public Guid ProjectId { get; set; }
+        public Guid? UserId { get; set; }
+        public Guid? ZoneId { get; set; }
 
         [Required, Column(TypeName = "varchar(25)")]
         public string? ProjectNumber { get; set; }
 
         [Required, Column(TypeName = "varchar(25)")]
         public string? ProjectName { get; set; }
-
-        public Guid? ZoneId { get; set; }
 
         [Required, Column(TypeName = "varchar(25)")]
         public string? ProjectCategory { get; set; }

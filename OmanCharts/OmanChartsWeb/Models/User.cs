@@ -7,6 +7,7 @@ namespace OmanChartsWeb.Models
     {
         public Guid Id { get; set; }
         public string? UserName { get; set; }
+        public string? CompanyName { get; set; }
         public string? FullName { get; set; }
         public string? Email { get; set; }
         public string? PhoneNumber { get; set; }
@@ -19,9 +20,15 @@ namespace OmanChartsWeb.Models
     public class Login
     {
         [Required(ErrorMessage = "User Name is required")]
-        public string? Username { get; set; }
+        public string? UserName { get; set; }
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
+    }
+    public class UserLogin
+    {
+        public string? FullName { get; set; }
+        public string? CompanyName { get; set; }
+        public string? LoginTime { get; set; }
     }
     public class LoginResponse
     {
@@ -36,9 +43,12 @@ namespace OmanChartsWeb.Models
     {
         [Required(ErrorMessage = "Email is required")]
         public string? Email { get; set; }
+        [Required(ErrorMessage = "UserName is required")]
+        public string? UserName { get; set; }
         [Required(ErrorMessage = "Password is required")]
         public string? Password { get; set; }
         public string? FullName { get; set; }
+        public string? CompanyName { get; set; }
         public string? PhoneNumber { get; set; }
         public Guid? ZoneId { get; set; }
         public string? ZoneName { get; set; }

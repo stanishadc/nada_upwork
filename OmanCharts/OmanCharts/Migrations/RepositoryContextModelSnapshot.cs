@@ -227,6 +227,9 @@ namespace OmanCharts.Migrations
                     b.Property<DateTime>("TimeExtension")
                         .HasColumnType("datetime2");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Year")
                         .IsRequired()
                         .HasColumnType("varchar(25)");
@@ -267,6 +270,9 @@ namespace OmanCharts.Migrations
                     b.Property<double?>("TotalProjects")
                         .HasColumnType("float");
 
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Year")
                         .IsRequired()
                         .HasColumnType("varchar(4)");
@@ -287,6 +293,9 @@ namespace OmanCharts.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("varchar(200)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -299,7 +308,7 @@ namespace OmanCharts.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
-                        .HasColumnType("varchar(25)");
+                        .HasColumnType("varchar(45)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -348,6 +357,23 @@ namespace OmanCharts.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("OmanCharts.Models.UserLogin", b =>
+                {
+                    b.Property<Guid?>("UserLoginId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime?>("LoginTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("UserLoginId");
+
+                    b.ToTable("UserLogins");
                 });
 
             modelBuilder.Entity("OmanCharts.Models.Zone", b =>

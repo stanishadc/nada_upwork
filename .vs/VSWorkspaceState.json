@@ -3,8 +3,9 @@
     "",
     "\\OmanCharts",
     "\\OmanCharts\\OmanChartsWeb",
-    "\\OmanCharts\\OmanChartsWeb\\Controllers"
+    "\\OmanCharts\\OmanChartsWeb\\Controllers",
+    "\\OmanCharts\\OmanChartsWeb\\Views"
   ],
-  "SelectedNode": "\\OmanCharts\\OmanChartsWeb\\Controllers\\ZoneController.cs",
+  "SelectedNode": "\\OmanCharts\\OmanChartsWeb\\Views\\User",
   "PreviewInSolutionExplorer": false
 }
