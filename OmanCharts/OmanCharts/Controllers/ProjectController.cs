@@ -83,7 +83,7 @@ namespace OmanCharts.Controllers
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
         [HttpGet]
-        [Route("GetByUserZone")]
+        [Route("GetByZone")]
         public async Task<IActionResult> GetByZone(Guid ZoneId,Guid UserId)
         {
             var data = await (from p in _context.Projects

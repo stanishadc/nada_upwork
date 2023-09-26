@@ -19,12 +19,25 @@ namespace OmanChartsWeb.Controllers
             List<Project> lists = new List<Project>();
             using (var httpClient = new HttpClient())
             {
-                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Project/Get"))
+                if (HttpContext.Session.GetString("Role") == "Customer")
                 {
-                    var apiData = await apiresponse.Content.ReadAsStringAsync();
-                    var jObject = JObject.Parse(apiData);
-                    var bids = JArray.Parse(jObject["data"].ToString());
-                    lists = bids.ToObject<List<Project>>();
+                    using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Project/GetByZone?ZoneId=" + HttpContext.Session.GetString("ZoneId") + "&UserId=" + HttpContext.Session.GetString("UserId") + ""))
+                    {
+                        var apiData = await apiresponse.Content.ReadAsStringAsync();
+                        var jObject = JObject.Parse(apiData);
+                        var bids = JArray.Parse(jObject["data"].ToString());
+                        lists = bids.ToObject<List<Project>>();
+                    }
+                }
+                else if (HttpContext.Session.GetString("Role") == "Admin")
+                {
+                    using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Statistic/Get"))
+                    {
+                        var apiData = await apiresponse.Content.ReadAsStringAsync();
+                        var jObject = JObject.Parse(apiData);
+                        var bids = JArray.Parse(jObject["data"].ToString());
+                        lists = bids.ToObject<List<Project>>();
+                    }
                 }
             }
             return View(lists);

@@ -82,10 +82,10 @@ namespace OmanCharts.Controllers
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
         [HttpGet]
-        [Route("GetUserDashboard/{ZoneId}")]
-        public async Task<IActionResult> GetUserDashboard(Guid ZoneId)
+        [Route("GetUserDashboard")]
+        public async Task<IActionResult> GetUserDashboard(Guid ZoneId, Guid UserId)
         {
-            var data = await _context.tblStatistics.Where(s => s.ZoneId == ZoneId).ToListAsync();
+            var data = await _context.tblStatistics.Where(s => s.ZoneId == ZoneId && s.UserId == UserId).ToListAsync();
             double totalInvestments = (double)(from num in data select num.Investments).Sum();
             double totalProjects = (double)(from num in data select num.TotalProjects).Sum();
             double totalLabour = (double)(from num in data select num.TotalLabour).Sum();
