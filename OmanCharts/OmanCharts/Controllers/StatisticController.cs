@@ -93,9 +93,9 @@ namespace OmanCharts.Controllers
                 double totalProjects = (double)(from num in data select num.TotalProjects).Sum();
                 double totalLabour = (double)(from num in data select num.TotalLabour).Sum();
                 double totalInvestors = (double)(from num in data select num.TotalInvestors).Sum();
-                return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = totalInvestments, TotalProjects = totalProjects, TotalLabour = totalLabour, TotalInvestors = totalInvestors, LastUpdated = lastrecord.LastUpdated, OmanizationRate = lastrecord.OmanizationRate });
+                return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = totalInvestments, TotalProjects = totalProjects, TotalLabour = totalLabour, TotalInvestors = totalInvestors, LastUpdated = lastrecord.LastUpdated.ToString("MMMM dd, yyyy"), OmanizationRate = lastrecord.OmanizationRate });
             }
-            return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = 0, TotalProjects = 0, TotalLabour = 0, TotalInvestors = 0, LastUpdated=DateTime.UtcNow, OmanizationRate = 0 });
+            return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = 0, TotalProjects = 0, TotalLabour = 0, TotalInvestors = 0, LastUpdated=DateTime.UtcNow.ToString("MMMM dd, yyyy"), OmanizationRate = 0 });
         }
         [HttpGet]
         [Route("GetAdminDashboard")]
@@ -109,7 +109,7 @@ namespace OmanCharts.Controllers
                 double totalProjects = (double)(from num in data select num.TotalProjects).Sum();
                 double totalLabour = (double)(from num in data select num.TotalLabour).Sum();
                 double totalInvestors = (double)(from num in data select num.TotalInvestors).Sum();
-                return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = totalInvestments, TotalProjects = totalProjects, TotalLabour = totalLabour, TotalInvestors = totalInvestors, LastUpdated = lastrecord.LastUpdated, OmanizationRate=lastrecord.OmanizationRate });
+                return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = totalInvestments, TotalProjects = totalProjects, TotalLabour = totalLabour, TotalInvestors = totalInvestors, LastUpdated = lastrecord.LastUpdated.ToString("MMMM dd, yyyy"), OmanizationRate=lastrecord.OmanizationRate });
             }
             return Ok(new
             {
@@ -118,7 +118,7 @@ namespace OmanCharts.Controllers
                 TotalProjects = 0,
                 TotalLabour = 0,
                 TotalInvestors = 0,
-                LastUpdated = DateTime.UtcNow,
+                LastUpdated = DateTime.UtcNow.ToString("MMMM dd, yyyy"),
                 OmanizationRate=0
             });
         }

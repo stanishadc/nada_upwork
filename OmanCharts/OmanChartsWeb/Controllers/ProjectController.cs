@@ -31,7 +31,7 @@ namespace OmanChartsWeb.Controllers
                 }
                 else if (HttpContext.Session.GetString("Role") == "Admin")
                 {
-                    using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Statistic/Get"))
+                    using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Project/Get"))
                     {
                         var apiData = await apiresponse.Content.ReadAsStringAsync();
                         var jObject = JObject.Parse(apiData);

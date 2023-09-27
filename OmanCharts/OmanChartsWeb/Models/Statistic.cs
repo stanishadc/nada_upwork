@@ -25,6 +25,6 @@ namespace OmanChartsWeb.Models
         public double? TotalInvestments { get; set; }
         public double? TotalInvestors { get; set; }
         public double? TotalProjects { get; set; }
-        public DateTime LastUpdated { get; set; }
+        public string? LastUpdated { get; set; }
     }
 }
