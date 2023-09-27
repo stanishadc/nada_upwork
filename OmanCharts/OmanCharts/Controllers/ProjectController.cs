@@ -44,7 +44,8 @@ namespace OmanCharts.Controllers
                                   p.RequiredAction,
                                   p.TimeExtension,
                                   z.ZoneId,
-                                  z.ZoneName
+                                  z.ZoneName,
+                                  p.LastUpdated
                               }).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
@@ -78,7 +79,8 @@ namespace OmanCharts.Controllers
                                   p.RequiredAction,
                                   p.TimeExtension,
                                   z.ZoneId,
-                                  z.ZoneName
+                                  z.ZoneName,
+                                  p.LastUpdated
                               }).Where(z => z.ProjectId == Id).FirstOrDefaultAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
@@ -113,7 +115,8 @@ namespace OmanCharts.Controllers
                                   p.TimeExtension,
                                   p.UserId,
                                   z.ZoneId,
-                                  z.ZoneName
+                                  z.ZoneName,
+                                  p.LastUpdated
                               }).Where(z => z.ZoneId == ZoneId && z.UserId == UserId).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
@@ -124,6 +127,7 @@ namespace OmanCharts.Controllers
             try
             {
                 model.ProjectId = Guid.NewGuid();
+                model.LastUpdated= DateTime.UtcNow;
                 _context.Add(model);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Record Created Successfully" });
@@ -147,6 +151,7 @@ namespace OmanCharts.Controllers
                 else
                 {
                     data = model;
+                    data.LastUpdated= DateTime.UtcNow;
                     _context.Entry(data).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
                     return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Record Updated Successfully" });

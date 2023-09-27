@@ -31,5 +31,6 @@ namespace OmanChartsWeb.Models
         public string? RequiredAction { get; set; }
         public string? Challenges { get; set; }
         public List<SelectListItem> ListofZones { get; set; }
+        public DateTime LastUpdated { get; set; }
     }
 }

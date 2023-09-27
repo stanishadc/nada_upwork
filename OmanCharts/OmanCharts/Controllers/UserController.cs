@@ -53,15 +53,18 @@ namespace OmanCharts.Controllers
         public async Task<IActionResult> GetLogs()
         {
             var data = await (from u in _context.Users
-                              join ur in _context.UserLogins on u.Id equals ur.UserId
+                              join ur in _context.UserRoles on u.Id equals ur.UserId                              
+                              join r in _context.Roles on ur.RoleId equals r.Id
+                              join ul in _context.UserLogins on u.Id equals ul.UserId
                               select new
                               {
                                   u.Id,
                                   u.FullName,
                                   u.CompanyName,
                                   u.Email,
-                                  ur.LoginTime,
-                              }).ToListAsync();
+                                  ul.LoginTime,
+                                  r.Name
+                              }).Where(r => r.Name == UserRoles.Customer).ToListAsync();
 
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
@@ -109,11 +112,11 @@ namespace OmanCharts.Controllers
                     {
                         authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                     }
-                    var token = GetToken(authClaims);
-                    await InsertLogin(user.Id);
+                    var token = GetToken(authClaims);                    
                     var roleName = userRoles.FirstOrDefault();
                     if (roleName == UserRoles.Customer)
                     {
+                        await InsertLogin(user.Id);
                         loginResponse.Token = new JwtSecurityTokenHandler().WriteToken(token);
                         loginResponse.Expiration = token.ValidTo;
                         loginResponse.UserId = user.Id;
@@ -176,7 +179,7 @@ namespace OmanCharts.Controllers
                 {
                     return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Email is mandatory!" });
                 }
-                #region Business user creation
+                #region admin creation
                 var userExists = await _userManager.FindByNameAsync(model.Email);
                 if (userExists != null)
                 {

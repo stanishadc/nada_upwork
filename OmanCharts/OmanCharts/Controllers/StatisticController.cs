@@ -32,7 +32,7 @@ namespace OmanCharts.Controllers
                                   p.TotalInvestors,
                                   p.ProjectCategory,
                                   p.LastUpdated,
-                                  z.ZoneName
+                                  z.ZoneName,
                               }).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
@@ -54,7 +54,7 @@ namespace OmanCharts.Controllers
                                   p.TotalInvestors,
                                   p.ProjectCategory,
                                   p.LastUpdated,
-                                  z.ZoneName
+                                  z.ZoneName,
                               }).Where(z => z.StatisticId == Id).FirstOrDefaultAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
@@ -77,7 +77,7 @@ namespace OmanCharts.Controllers
                                   p.LastUpdated,
                                   p.UserId,
                                   z.ZoneId,
-                                  z.ZoneName
+                                  z.ZoneName,
                               }).Where(z => z.ZoneId == ZoneId && z.UserId == UserId).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
@@ -86,11 +86,41 @@ namespace OmanCharts.Controllers
         public async Task<IActionResult> GetUserDashboard(Guid ZoneId, Guid UserId)
         {
             var data = await _context.tblStatistics.Where(s => s.ZoneId == ZoneId && s.UserId == UserId).ToListAsync();
-            double totalInvestments = (double)(from num in data select num.Investments).Sum();
-            double totalProjects = (double)(from num in data select num.TotalProjects).Sum();
-            double totalLabour = (double)(from num in data select num.TotalLabour).Sum();
-            double totalInvestors = (double)(from num in data select num.TotalLabour).Sum();
-            return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = totalInvestments, TotalProjects = totalProjects, TotalLabour= totalLabour, TotalInvestors=totalInvestors });
+            if (data.Count > 0)
+            {
+                var lastrecord = data.LastOrDefault();
+                double totalInvestments = (double)(from num in data select num.Investments).Sum();
+                double totalProjects = (double)(from num in data select num.TotalProjects).Sum();
+                double totalLabour = (double)(from num in data select num.TotalLabour).Sum();
+                double totalInvestors = (double)(from num in data select num.TotalInvestors).Sum();
+                return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = totalInvestments, TotalProjects = totalProjects, TotalLabour = totalLabour, TotalInvestors = totalInvestors, LastUpdated = lastrecord.LastUpdated, OmanizationRate = lastrecord.OmanizationRate });
+            }
+            return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = 0, TotalProjects = 0, TotalLabour = 0, TotalInvestors = 0, LastUpdated=DateTime.UtcNow, OmanizationRate = 0 });
+        }
+        [HttpGet]
+        [Route("GetAdminDashboard")]
+        public async Task<IActionResult> GetAdminDashboard()
+        {
+            var data = await _context.tblStatistics.ToListAsync();
+            if (data.Count > 0)
+            {
+                var lastrecord = data.LastOrDefault();
+                double totalInvestments = (double)(from num in data select num.Investments).Sum();
+                double totalProjects = (double)(from num in data select num.TotalProjects).Sum();
+                double totalLabour = (double)(from num in data select num.TotalLabour).Sum();
+                double totalInvestors = (double)(from num in data select num.TotalInvestors).Sum();
+                return Ok(new { StatusCode = HttpStatusCode.OK, TotalInvestments = totalInvestments, TotalProjects = totalProjects, TotalLabour = totalLabour, TotalInvestors = totalInvestors, LastUpdated = lastrecord.LastUpdated, OmanizationRate=lastrecord.OmanizationRate });
+            }
+            return Ok(new
+            {
+                StatusCode = HttpStatusCode.OK,
+                TotalInvestments = 0,
+                TotalProjects = 0,
+                TotalLabour = 0,
+                TotalInvestors = 0,
+                LastUpdated = DateTime.UtcNow,
+                OmanizationRate=0
+            });
         }
         [HttpPost]
         [Route("Insert")]
@@ -99,7 +129,7 @@ namespace OmanCharts.Controllers
             try
             {
                 model.StatisticId = Guid.NewGuid();
-                model.LastUpdated=DateTime.UtcNow;
+                model.LastUpdated = DateTime.UtcNow;
                 _context.Add(model);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Record Created Successfully" });

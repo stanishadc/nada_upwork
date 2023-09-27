@@ -194,6 +194,9 @@ namespace OmanCharts.Migrations
                     b.Property<double?>("IdentifiedCost")
                         .HasColumnType("float");
 
+                    b.Property<DateTime?>("LastUpdated")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Progress")
                         .IsRequired()
                         .HasColumnType("varchar(25)");
