@@ -3,7 +3,7 @@
     {
         if (TempData["role"]=="Admin")
         {
-            Layout = "_Layout";
+            Layout = "_AdminLayout";
         }
         else if (TempData["role"]=="Customer")
         {
@@ -11,11 +11,11 @@
         }
         else
         {
-            Layout = "_LoginLayout";
+            Layout = "_PublicLayout";
         }
     }
     else
     {
-        Layout = "_LoginLayout";
+        Layout = "_PublicLayout";
     }
 }

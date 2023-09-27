@@ -4,6 +4,8 @@ using Newtonsoft.Json.Linq;
 using OmanChartsWeb.Models;
 using System.Diagnostics;
 using System.Text;
+using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OmanChartsWeb.Controllers
 {
@@ -13,58 +15,54 @@ namespace OmanChartsWeb.Controllers
         {
         }
 
-        public IActionResult Index()
-        {            
-            return View();
-        }
-        
-        public IActionResult Logout()
-        {
-            HttpContext.Session.Remove("Role");
-            HttpContext.Session.Remove("UserId");
-            HttpContext.Session.Remove("ZoneId");
-            return View("Index");
-        }
-        [HttpPost]
-        public async Task<IActionResult> Login(Login login)
+        public async Task<IActionResult> Index()
         {
             using (var httpClient = new HttpClient())
             {
-                StringContent content = new StringContent(JsonConvert.SerializeObject(login), Encoding.UTF8, "application/json");
-
-                using (var response = await httpClient.PostAsync("https://localhost:7089/api/User/login", content))
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Statistic/GetDashboard"))
                 {
-                    var apiData = await response.Content.ReadAsStringAsync();
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject<DashBoardStatistic>(apiData);
+                    ViewBag.Labels = JsonConvert.SerializeObject(data.Labels);
+                    ViewBag.LabourSeries = JsonConvert.SerializeObject(data.LabourSeries);
+                    ViewBag.ProjectSeries = JsonConvert.SerializeObject(data.ProjectSeries);
+                    return View(data);
+                }
+            }
+        }
+        public async Task<IActionResult> Project()
+        {
+            List<Project> lists = new List<Project>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Project/Get"))
+                {
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
+                    var jObject = JObject.Parse(apiData);
+                    var bids = JArray.Parse(jObject["data"].ToString());
+                    lists = bids.ToObject<List<Project>>();
+                }
+            }
+            return View(lists);
+        }
+        public async Task<IActionResult> ProjectView(Guid? Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            using (var httpClient = new HttpClient())
+            {
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Project/GetById/" + Id))
+                {
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
                     var jObject = JsonConvert.DeserializeObject<Response>(apiData);
                     var jObject1 = JObject.Parse(apiData);
                     var bids = jObject1["data"].ToString();
-                    var data = JsonConvert.DeserializeObject<LoginResponse>(bids);
-                    if(data !=null)
-                    {
-                        if (data.Status)
-                        {
-                            HttpContext.Session.SetString("Role", data.Role);
-                            HttpContext.Session.SetString("UserId", data.UserId);
-                            HttpContext.Session.SetString("ZoneId", data.ZoneId.ToString());
-                            var routeValue = new RouteValueDictionary(new { action = "Index", controller = "Dashboard" });
-                            return RedirectToRoute(routeValue);
-                        }
-                        else
-                        {
-                            return RedirectToAction("Index");
-                        }
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index");
-                    }
+                    var data = JsonConvert.DeserializeObject<Project>(bids);
+                    return View(data);
                 }
-            }            
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

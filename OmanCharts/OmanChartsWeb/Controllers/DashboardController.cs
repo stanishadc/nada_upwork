@@ -20,19 +20,25 @@ namespace OmanChartsWeb.Controllers
             {                
                 if (HttpContext.Session.GetString("Role") == "Customer")
                 {
-                    using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Statistic/GetUserDashboard?ZoneId=" + HttpContext.Session.GetString("ZoneId") + "&UserId=" + HttpContext.Session.GetString("UserId") + ""))
+                    using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Statistic/GetDashboard?ZoneId=" + HttpContext.Session.GetString("ZoneId") + "&UserId=" + HttpContext.Session.GetString("UserId") + ""))
                     {
                         var apiData = await apiresponse.Content.ReadAsStringAsync();
                         var data = JsonConvert.DeserializeObject<DashBoardStatistic>(apiData);
+                        ViewBag.Labels = JsonConvert.SerializeObject(data.Labels);
+                        ViewBag.LabourSeries = JsonConvert.SerializeObject(data.LabourSeries);
+                        ViewBag.ProjectSeries = JsonConvert.SerializeObject(data.ProjectSeries);
                         return View(data);
                     }
                 }
                 else if (HttpContext.Session.GetString("Role") == "Admin")
                 {
-                    using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Statistic/GetAdminDashboard"))
+                    using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Statistic/GetDashboard"))
                     {
                         var apiData = await apiresponse.Content.ReadAsStringAsync();
                         var data = JsonConvert.DeserializeObject<DashBoardStatistic>(apiData);
+                        ViewBag.Labels = JsonConvert.SerializeObject(data.Labels);
+                        ViewBag.LabourSeries = JsonConvert.SerializeObject(data.LabourSeries);
+                        ViewBag.ProjectSeries = JsonConvert.SerializeObject(data.ProjectSeries);
                         return View(data);
                     }
                 }

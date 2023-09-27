@@ -122,6 +122,57 @@ namespace OmanCharts.Controllers
                 OmanizationRate=0
             });
         }
+        [HttpGet]
+        [Route("GetDashboard")]
+        public async Task<IActionResult> GetDashboard(Guid? UserId, Guid? ZoneId)
+        {
+            List<Statistic> data = new List<Statistic>();
+            if(UserId == null || ZoneId == null)
+            {
+                data= await _context.tblStatistics.ToListAsync();
+            }
+            else
+            {
+                data = await _context.tblStatistics.Where(s => s.UserId == UserId && s.ZoneId == ZoneId).ToListAsync();
+            }
+            if (data.Count > 0)
+            {
+                //Counts
+
+                var lastrecord = data.LastOrDefault();
+                double totalInvestments = (double)(from num in data select num.Investments).Sum();
+                double totalProjects = (double)(from num in data select num.TotalProjects).Sum();
+                double totalLabour = (double)(from num in data select num.TotalLabour).Sum();
+                double totalInvestors = (double)(from num in data select num.TotalInvestors).Sum();
+
+
+                //Charts
+                double?[] ProjectSeries = new double?[data.Count];
+                double?[] LabourSeries = new double?[data.Count];
+                string[] Labels = new string[data.Count];
+                List<string> labelsData = new List<string>();
+                List<double?> seriesProjectsData = new List<double?>();
+                List<double?> seriesLabourData = new List<double?>();
+                for (int i = 0; i < data.Count; i++)
+                {
+                    labelsData.Add(data[i].ProjectCategory);
+                    seriesProjectsData.Add(data[i].TotalProjects);
+                    seriesLabourData.Add(data[i].TotalLabour);
+                }
+                ProjectSeries = seriesProjectsData.ToArray();
+                LabourSeries = seriesLabourData.ToArray();
+                Labels = labelsData.ToArray();
+                return Ok(new { StatusCode = HttpStatusCode.OK, ProjectSeries = ProjectSeries, Labels = Labels, LabourSeries= LabourSeries, TotalInvestments = totalInvestments, TotalProjects = totalProjects, TotalLabour = totalLabour, TotalInvestors = totalInvestors, LastUpdated = lastrecord.LastUpdated.ToString("MMMM dd, yyyy"), OmanizationRate = lastrecord.OmanizationRate });
+            }
+            return Ok(new { StatusCode = HttpStatusCode.OK, ProjectSeries = 0, Labels = 0, LabourSeries = 0,
+                TotalInvestments = 0,
+                TotalProjects = 0,
+                TotalLabour = 0,
+                TotalInvestors = 0,
+                LastUpdated = DateTime.UtcNow.ToString("MMMM dd, yyyy"),
+                OmanizationRate = 0
+            });
+        }
         [HttpPost]
         [Route("Insert")]
         public IActionResult Insert(Statistic model)

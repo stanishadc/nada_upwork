@@ -12440,16 +12440,16 @@ span.flatpickr-weekday {
   right: 0;
   left: 0;
   width: 100%;
-  height: 380px;
+  height: 100%;
 }
 @media (max-width: 575.98px) {
   .auth-one-bg-position {
-    height: 280px;
+    height: 100%;
   }
 }
 
 .auth-one-bg {
-  background-image: url("../images/auth-one-bg.jpg");
+  background-image: url("../images/auth-one-bg.jpeg");
   background-position: center;
   background-size: cover;
 }

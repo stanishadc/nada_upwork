@@ -10,7 +10,7 @@
     {
         if (role.ToString() == "Admin")
         {
-            Layout = "_Layout";
+            Layout = "_AdminLayout";
         }
         else if (role.ToString() == "Customer")
         {
@@ -18,12 +18,12 @@
         }
         else
         {
-            Layout = "_LoginLayout";
+            Layout = "_PublicLayout";
         }
     }
     else
     {
-        Layout = "_LoginLayout";
+        Layout = "_PublicLayout";
     }
 }
 <div class="container p-3 my-3 border">

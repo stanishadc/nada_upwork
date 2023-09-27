@@ -8,7 +8,7 @@
     {
         if (role.ToString() == "Admin")
         {
-            Layout = "_Layout";
+            Layout = "_AdminLayout";
         }
         else if (role.ToString() == "Customer")
         {
@@ -16,14 +16,60 @@
         }
         else
         {
-            Layout = "_LoginLayout";
+            Layout = "_PublicLayout";
         }
     }
     else
     {
-        Layout = "_LoginLayout";
+        Layout = "_PublicLayout";
     }
 }
+<script type="text/javascript">
+    window.onload = function () {
+        var projectoptions = {
+            series: @Html.Raw(ViewBag.ProjectSeries),
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: @Html.Raw(ViewBag.Labels),
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+        var projectchart = new ApexCharts(document.querySelector("#projectchart"), projectoptions);
+        var labouroptions = {
+            series: @Html.Raw(ViewBag.LabourSeries),
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: @Html.Raw(ViewBag.Labels),
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+        var labourchart = new ApexCharts(document.querySelector("#labourchart"), labouroptions);
+        projectchart.render();
+        labourchart.render();
+    }
+</script>
 <div class="row">
     <div class="col-xl-3 col-md-6">
         <!-- card -->
@@ -54,7 +100,7 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-between mt-4">
                     <div>
-                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.OmanizationRate)</label> (OMR) </h4>
+                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.OmanizationRate)</label> %</h4>
                         <a href="" class="text-decoration-underline"><label class="form-label">@Html.DisplayFor(model => model.LastUpdated)</label></a>
                     </div>
                 </div>
@@ -72,7 +118,7 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-between mt-4">
                     <div>
-                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.TotalProjects)</label> (OMR) </h4>
+                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.TotalProjects)</label></h4>
                         <a href="" class="text-decoration-underline"><label class="form-label">@Html.DisplayFor(model => model.LastUpdated)</label></a>
                     </div>
                 </div>
@@ -90,7 +136,7 @@
                 </div>
                 <div class="d-flex align-items-end justify-content-between mt-4">
                     <div>
-                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.TotalLabour)</label> (OMR) </h4>
+                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.TotalLabour)</label></h4>
                         <a href="" class="text-decoration-underline"><label class="form-label">@Html.DisplayFor(model => model.LastUpdated)</label></a>
                     </div>
                 </div>
@@ -105,39 +151,17 @@
                 <h4 class="card-title mb-0 flex-grow-1">Total Projects</h4>
             </div>
             <div class="card-body">
-                <div id="store-visits-source" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
+                <div id="projectchart"></div>
             </div>
         </div>
     </div>
-    <div class="col-xl-6">
-        <div class="card card-height-100">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Total Investments</h4>
-            </div>
-            <div class="card-body">
-                <div id="store-visits-source" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
     <div class="col-xl-6">
         <div class="card card-height-100">
             <div class="card-header align-items-center d-flex">
                 <h4 class="card-title mb-0 flex-grow-1">Total Labour</h4>
             </div>
             <div class="card-body">
-                <div id="store-visits-source" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
-            </div>
-        </div>
-    </div>
-    <div class="col-xl-6">
-        <div class="card card-height-100">
-            <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Investment Applications</h4>
-            </div>
-            <div class="card-body">
-                <div id="store-visits-source" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
+                <div id="labourchart"></div>
             </div>
         </div>
     </div>

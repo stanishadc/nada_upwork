@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bGzVDMBtRLO/29hXAdt5/B+jthoObc0VHTD7inSrlHw=",
+  "Hash": "fl8QcOB6GvY9lGUqjclu7YFI5b6I1by+GVvuNvA6cpk=",
   "Source": "OmanChartsWeb",
   "BasePath": "_content/OmanChartsWeb",
   "Mode": "Default",
@@ -1224,12 +1224,12 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\auth-offline.gif"
     },
     {
-      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\auth-one-bg.jpg",
+      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\auth-one-bg.jpeg",
       "SourceId": "OmanChartsWeb",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\",
       "BasePath": "_content/OmanChartsWeb",
-      "RelativePath": "assets/images/auth-one-bg.jpg",
+      "RelativePath": "assets/images/auth-one-bg.jpeg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1238,7 +1238,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\auth-one-bg.jpg"
+      "OriginalItemSpec": "wwwroot\\assets\\images\\auth-one-bg.jpeg"
+    },
+    {
+      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\auth-one-bg1.jpg",
+      "SourceId": "OmanChartsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\",
+      "BasePath": "_content/OmanChartsWeb",
+      "RelativePath": "assets/images/auth-one-bg1.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\auth-one-bg1.jpg"
     },
     {
       "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\bg-auth.jpg",
@@ -1921,12 +1938,12 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\faq-img.png"
     },
     {
-      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\favicon.ico",
+      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\favicon.png",
       "SourceId": "OmanChartsWeb",
       "SourceType": "Discovered",
       "ContentRoot": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\",
       "BasePath": "_content/OmanChartsWeb",
-      "RelativePath": "assets/images/favicon.ico",
+      "RelativePath": "assets/images/favicon.png",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -1935,7 +1952,24 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\assets\\images\\favicon.ico"
+      "OriginalItemSpec": "wwwroot\\assets\\images\\favicon.png"
+    },
+    {
+      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\favicon1.ico",
+      "SourceId": "OmanChartsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\",
+      "BasePath": "_content/OmanChartsWeb",
+      "RelativePath": "assets/images/favicon1.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\favicon1.ico"
     },
     {
       "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\file.png",
@@ -6953,6 +6987,23 @@
       "OriginalItemSpec": "wwwroot\\assets\\images\\layouts\\vertical.png"
     },
     {
+      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\login_banner.jpeg",
+      "SourceId": "OmanChartsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\",
+      "BasePath": "_content/OmanChartsWeb",
+      "RelativePath": "assets/images/login_banner.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\login_banner.jpeg"
+    },
+    {
       "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\logo-dark.png",
       "SourceId": "OmanChartsWeb",
       "SourceType": "Discovered",
@@ -7002,6 +7053,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\logo-sm.png"
+    },
+    {
+      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\logo-sm1.png",
+      "SourceId": "OmanChartsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\",
+      "BasePath": "_content/OmanChartsWeb",
+      "RelativePath": "assets/images/logo-sm1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\logo-sm1.png"
     },
     {
       "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\logo-sm-1.png",
@@ -7597,6 +7665,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\nft\\wallet\\metamask.png"
+    },
+    {
+      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\opaz_logo_main1.png",
+      "SourceId": "OmanChartsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\",
+      "BasePath": "_content/OmanChartsWeb",
+      "RelativePath": "assets/images/opaz_logo_main1.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\opaz_logo_main1.png"
     },
     {
       "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\products\\img-1.png",

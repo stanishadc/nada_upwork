@@ -1,47 +1,147 @@
-﻿@{
-    ViewData["Title"] = "Dashboard";
+﻿@model DashBoardStatistic
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "_PublicLayout";
 }
-<div class="auth-page-content">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8 col-lg-6 col-xl-5">
-                <div class="card mt-4">
-
-                    <div class="card-body p-4">
-                        <div class="text-center mt-2">
-                            <h5 class="text-primary">Welcome Back !</h5>
-                            <p class="text-muted">Sign in to continue...</p>
-                        </div>
-                        <div class="p-2 mt-4">
-                            <form asp-action="Login">
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" class="form-control" name="username" placeholder="Enter username">
-                                </div>
-
-                                <div class="mb-3">
-                                    <div class="float-end">
-                                        
-                                    </div>
-                                    <label class="form-label" for="password">Password</label>
-                                    <div class="position-relative auth-pass-inputgroup mb-3">
-                                        <input type="password" class="form-control pe-5 password-input" placeholder="Enter password" name="password">
-                                        <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4">
-                                    <button class="btn btn-success w-100" type="submit">Sign In</button>
-                                </div>
-                            </form>
-                        </div>
+<script type="text/javascript">
+    window.onload = function () {
+        var projectoptions = {
+            series: @Html.Raw(ViewBag.ProjectSeries),
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: @Html.Raw(ViewBag.Labels),
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+        var projectchart = new ApexCharts(document.querySelector("#projectchart"), projectoptions);
+        var labouroptions = {
+            series: @Html.Raw(ViewBag.LabourSeries),
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: @Html.Raw(ViewBag.Labels),
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+        var labourchart = new ApexCharts(document.querySelector("#labourchart"), labouroptions);
+        projectchart.render();
+        labourchart.render();
+    }
+</script>
+<div class="row">
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-animate">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 overflow-hidden">
+                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Investments</p>
                     </div>
-                    <!-- end card body -->
                 </div>
+                <div class="d-flex align-items-end justify-content-between mt-4">
+                    <div>
+                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.TotalInvestments)</label> (OMR) </h4>
+                        <a href="" class="text-decoration-underline"><label class="form-label">@Html.DisplayFor(model => model.LastUpdated)</label></a>
+                    </div>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-animate">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 overflow-hidden">
+                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Labour</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-end justify-content-between mt-4">
+                    <div>
+                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.TotalLabour)</label></h4>
+                        <a href="" class="text-decoration-underline"><label class="form-label">@Html.DisplayFor(model => model.LastUpdated)</label></a>
+                    </div>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-animate">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 overflow-hidden">
+                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Omanization Rate</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-end justify-content-between mt-4">
+                    <div>
+                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.OmanizationRate)</label>% </h4>
+                        <a href="" class="text-decoration-underline"><label class="form-label">@Html.DisplayFor(model => model.LastUpdated)</label></a>
+                    </div>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->
+    <div class="col-xl-3 col-md-6">
+        <!-- card -->
+        <div class="card card-animate">
+            <div class="card-body">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1 overflow-hidden">
+                        <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Projects</p>
+                    </div>
+                </div>
+                <div class="d-flex align-items-end justify-content-between mt-4">
+                    <div>
+                        <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.TotalProjects)</label></h4>
+                        <a href="" class="text-decoration-underline"><label class="form-label">@Html.DisplayFor(model => model.LastUpdated)</label></a>
+                    </div>
+                </div>
+            </div><!-- end card body -->
+        </div><!-- end card -->
+    </div><!-- end col -->    
+</div>
+<div class="row">
+    <div class="col-xl-6">
+        <div class="card card-height-100">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Total Projects</h4>
+            </div>
+            <div class="card-body">
+                <div id="projectchart"></div>
             </div>
         </div>
-        <!-- end row -->
     </div>
-    <!-- end container -->
+    <div class="col-xl-6">
+        <div class="card card-height-100">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Total Labour</h4>
+            </div>
+            <div class="card-body">
+                <div id="labourchart"></div>
+            </div>
+        </div>
+    </div>
 </div>
-

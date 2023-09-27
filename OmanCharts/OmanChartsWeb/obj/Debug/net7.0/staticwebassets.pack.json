@@ -281,8 +281,12 @@
       "PackagePath": "staticwebassets\\assets\\images\\auth-offline.gif"
     },
     {
-      "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\auth-one-bg.jpg",
-      "PackagePath": "staticwebassets\\assets\\images\\auth-one-bg.jpg"
+      "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\auth-one-bg.jpeg",
+      "PackagePath": "staticwebassets\\assets\\images\\auth-one-bg.jpeg"
+    },
+    {
+      "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\auth-one-bg1.jpg",
+      "PackagePath": "staticwebassets\\assets\\images\\auth-one-bg1.jpg"
     },
     {
       "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\bg-auth.jpg",
@@ -445,8 +449,12 @@
       "PackagePath": "staticwebassets\\assets\\images\\faq-img.png"
     },
     {
-      "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\favicon.ico",
-      "PackagePath": "staticwebassets\\assets\\images\\favicon.ico"
+      "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\favicon.png",
+      "PackagePath": "staticwebassets\\assets\\images\\favicon.png"
+    },
+    {
+      "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\favicon1.ico",
+      "PackagePath": "staticwebassets\\assets\\images\\favicon1.ico"
     },
     {
       "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\file.png",
@@ -1629,6 +1637,10 @@
       "PackagePath": "staticwebassets\\assets\\images\\layouts\\vertical.png"
     },
     {
+      "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\login_banner.jpeg",
+      "PackagePath": "staticwebassets\\assets\\images\\login_banner.jpeg"
+    },
+    {
       "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\logo-dark.png",
       "PackagePath": "staticwebassets\\assets\\images\\logo-dark.png"
     },
@@ -1643,6 +1655,10 @@
     {
       "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\logo-sm.png",
       "PackagePath": "staticwebassets\\assets\\images\\logo-sm.png"
+    },
+    {
+      "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\logo-sm1.png",
+      "PackagePath": "staticwebassets\\assets\\images\\logo-sm1.png"
     },
     {
       "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\mac-img.png",
@@ -1779,6 +1795,10 @@
     {
       "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\nft\\wallet\\metamask.png",
       "PackagePath": "staticwebassets\\assets\\images\\nft\\wallet\\metamask.png"
+    },
+    {
+      "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\opaz_logo_main1.png",
+      "PackagePath": "staticwebassets\\assets\\images\\opaz_logo_main1.png"
     },
     {
       "Id": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\products\\img-1.png",

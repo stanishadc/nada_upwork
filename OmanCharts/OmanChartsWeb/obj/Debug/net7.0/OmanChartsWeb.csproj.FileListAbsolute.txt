@@ -20,7 +20,6 @@ D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0
 D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\staticwebassets.pack.json
 D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\staticwebassets.build.json
 D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\staticwebassets.development.json
-D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\scopedcss\bundle\OmanChartsWeb.styles.css
 D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\scopedcss\projectbundle\OmanChartsWeb.bundle.scp.css
 D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\OmanChartsWeb.dll
@@ -31,3 +30,4 @@ D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0
 D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\bin\Debug\net7.0\Newtonsoft.Json.dll
 D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\OmanChartsWeb.csproj.AssemblyReference.cache
 D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\OmanChartsWeb.csproj.CopyComplete
+D:\Developerscode\Projects\upwork_nada\OmanCharts\OmanChartsWeb\obj\Debug\net7.0\scopedcss\Views\Shared\_AdminLayout.cshtml.rz.scp.css
