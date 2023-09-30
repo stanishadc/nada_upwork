@@ -68,6 +68,50 @@
         var labourchart = new ApexCharts(document.querySelector("#labourchart"), labouroptions);
         projectchart.render();
         labourchart.render();
+
+        var investorsoptions = {
+            series: @Html.Raw(ViewBag.InvestorSeries),
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: @Html.Raw(ViewBag.Labels),
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+        var investorchart = new ApexCharts(document.querySelector("#investorschart"), investorsoptions);
+        investorchart.render();
+
+        var orateoptions = {
+            series: @Html.Raw(ViewBag.ORateSeries),
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: @Html.Raw(ViewBag.Labels),
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        };
+        var oratechart = new ApexCharts(document.querySelector("#oRatechart"), orateoptions);
+        oratechart.render();
     }
 </script>
 <div class="row">
@@ -162,6 +206,26 @@
             </div>
             <div class="card-body">
                 <div id="labourchart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="card card-height-100">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Total Investors</h4>
+            </div>
+            <div class="card-body">
+                <div id="investorschart"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6">
+        <div class="card card-height-100">
+            <div class="card-header align-items-center d-flex">
+                <h4 class="card-title mb-0 flex-grow-1">Omanization Rate</h4>
+            </div>
+            <div class="card-body">
+                <div id="oRatechart"></div>
             </div>
         </div>
     </div>

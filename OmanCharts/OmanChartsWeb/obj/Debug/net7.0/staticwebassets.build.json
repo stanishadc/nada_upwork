@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "fl8QcOB6GvY9lGUqjclu7YFI5b6I1by+GVvuNvA6cpk=",
+  "Hash": "0SNcSX/LMZmjmjz/fPXwGDbJHVFJBVID0/AwIOuevMA=",
   "Source": "OmanChartsWeb",
   "BasePath": "_content/OmanChartsWeb",
   "Mode": "Default",
@@ -7665,6 +7665,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\assets\\images\\nft\\wallet\\metamask.png"
+    },
+    {
+      "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\opaz_logo_img.png",
+      "SourceId": "OmanChartsWeb",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\",
+      "BasePath": "_content/OmanChartsWeb",
+      "RelativePath": "assets/images/opaz_logo_img.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\assets\\images\\opaz_logo_img.png"
     },
     {
       "Identity": "D:\\Developerscode\\Projects\\upwork_nada\\OmanCharts\\OmanChartsWeb\\wwwroot\\assets\\images\\opaz_logo_main1.png",

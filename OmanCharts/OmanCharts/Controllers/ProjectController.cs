@@ -85,8 +85,8 @@ namespace OmanCharts.Controllers
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
         [HttpGet]
-        [Route("GetByZone")]
-        public async Task<IActionResult> GetByZone(Guid ZoneId,Guid UserId)
+        [Route("GetByZoneUser")]
+        public async Task<IActionResult> GetByZoneUser(Guid ZoneId, Guid UserId)
         {
             var data = await (from p in _context.Projects
                               join z in _context.Zones on p.ZoneId equals z.ZoneId
@@ -120,6 +120,42 @@ namespace OmanCharts.Controllers
                               }).Where(z => z.ZoneId == ZoneId && z.UserId == UserId).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
+        [HttpGet]
+        [Route("GetByZone")]
+        public async Task<IActionResult> GetByZone(Guid ZoneId)
+        {
+            var data = await (from p in _context.Projects
+                              join z in _context.Zones on p.ZoneId equals z.ZoneId
+                              select new
+                              {
+                                  p.ProjectId,
+                                  p.ProjectNumber,
+                                  p.ProjectName,
+                                  p.ProjectPeriod,
+                                  p.Year,
+                                  p.StartDateContract,
+                                  p.EndDateContract,
+                                  p.Challenges,
+                                  p.ChangeRequestCost,
+                                  p.CompletionDate,
+                                  p.Consultant,
+                                  p.Contractor,
+                                  p.Cost,
+                                  p.Expenses,
+                                  p.FinanceEntity,
+                                  p.IdentifiedCost,
+                                  p.Progress,
+                                  p.ProjectCategory,
+                                  p.RemainingCost,
+                                  p.RequiredAction,
+                                  p.TimeExtension,
+                                  p.UserId,
+                                  z.ZoneId,
+                                  z.ZoneName,
+                                  p.LastUpdated
+                              }).Where(z => z.ZoneId == ZoneId).ToListAsync();
+            return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
+        }
         [HttpPost]
         [Route("Insert")]
         public IActionResult Insert(Project model)
@@ -127,7 +163,7 @@ namespace OmanCharts.Controllers
             try
             {
                 model.ProjectId = Guid.NewGuid();
-                model.LastUpdated= DateTime.UtcNow;
+                model.LastUpdated = DateTime.UtcNow;
                 _context.Add(model);
                 _context.SaveChanges();
                 return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Record Created Successfully" });
@@ -151,7 +187,7 @@ namespace OmanCharts.Controllers
                 else
                 {
                     data = model;
-                    data.LastUpdated= DateTime.UtcNow;
+                    data.LastUpdated = DateTime.UtcNow;
                     _context.Entry(data).State = EntityState.Modified;
                     await _context.SaveChangesAsync();
                     return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Message = "Record Updated Successfully" });

@@ -26,6 +26,8 @@ namespace OmanChartsWeb.Controllers
                     ViewBag.Labels = JsonConvert.SerializeObject(data.Labels);
                     ViewBag.LabourSeries = JsonConvert.SerializeObject(data.LabourSeries);
                     ViewBag.ProjectSeries = JsonConvert.SerializeObject(data.ProjectSeries);
+                    ViewBag.ORateSeries = JsonConvert.SerializeObject(data.ORateSeries);
+                    ViewBag.InvestorSeries = JsonConvert.SerializeObject(data.InvestorSeries);
                     return View(data);
                 }
             }
@@ -36,6 +38,21 @@ namespace OmanChartsWeb.Controllers
             using (var httpClient = new HttpClient())
             {
                 using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Project/Get"))
+                {
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
+                    var jObject = JObject.Parse(apiData);
+                    var bids = JArray.Parse(jObject["data"].ToString());
+                    lists = bids.ToObject<List<Project>>();
+                }
+            }
+            return View(lists);
+        }
+        public async Task<IActionResult> ProjectZone(Guid? Id)
+        {
+            List<Project> lists = new List<Project>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Project/GetByZone?ZoneId=" + Id))
                 {
                     var apiData = await apiresponse.Content.ReadAsStringAsync();
                     var jObject = JObject.Parse(apiData);

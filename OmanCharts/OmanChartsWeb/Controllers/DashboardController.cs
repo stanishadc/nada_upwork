@@ -27,6 +27,8 @@ namespace OmanChartsWeb.Controllers
                         ViewBag.Labels = JsonConvert.SerializeObject(data.Labels);
                         ViewBag.LabourSeries = JsonConvert.SerializeObject(data.LabourSeries);
                         ViewBag.ProjectSeries = JsonConvert.SerializeObject(data.ProjectSeries);
+                        ViewBag.ORateSeries = JsonConvert.SerializeObject(data.ORateSeries);
+                        ViewBag.InvestorSeries = JsonConvert.SerializeObject(data.InvestorSeries);
                         return View(data);
                     }
                 }
@@ -39,6 +41,8 @@ namespace OmanChartsWeb.Controllers
                         ViewBag.Labels = JsonConvert.SerializeObject(data.Labels);
                         ViewBag.LabourSeries = JsonConvert.SerializeObject(data.LabourSeries);
                         ViewBag.ProjectSeries = JsonConvert.SerializeObject(data.ProjectSeries);
+                        ViewBag.ORateSeries = JsonConvert.SerializeObject(data.ORateSeries);
+                        ViewBag.InvestorSeries = JsonConvert.SerializeObject(data.InvestorSeries);
                         return View(data);
                     }
                 }

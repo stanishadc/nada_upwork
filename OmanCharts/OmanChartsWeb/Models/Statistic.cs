@@ -29,5 +29,8 @@ namespace OmanChartsWeb.Models
         public double?[] ProjectSeries { get; set; }
         public string?[] Labels { get; set; }
         public double?[] LabourSeries { get; set; }
+        public double?[] ORateSeries { get; set; }
+        public double?[] InvestorSeries { get; set; }
+        public List<Zone> ZonesList { get; set; }
     }
 }

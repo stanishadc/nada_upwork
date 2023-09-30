@@ -665,10 +665,10 @@ File: Main Css File
 .footer {
   bottom: 0;
   padding: 20px calc(1.5rem * 0.5);
-  position: absolute;
+  position: relative;
   left: 0;
   color: var(--vz-footer-color);
-  right: 250px;
+  right: 130px;
   height: 60px;
   background-color: var(--vz-footer-bg);
 }
@@ -12440,11 +12440,11 @@ span.flatpickr-weekday {
   right: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 @media (max-width: 575.98px) {
   .auth-one-bg-position {
-    height: 100%;
+    height: 100vh;
   }
 }
 
