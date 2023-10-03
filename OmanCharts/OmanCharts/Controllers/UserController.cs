@@ -99,20 +99,20 @@ namespace OmanCharts.Controllers
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null)
             {
-                var checkpassword = await _userManager.CheckPasswordAsync(user, model.Password);
+                var zone = await _context.Zones.Where(z => z.ZoneId == user.ZoneId).FirstOrDefaultAsync();
                 if (await _userManager.CheckPasswordAsync(user, model.Password))
                 {
                     var userRoles = await _userManager.GetRolesAsync(user);
                     var authClaims = new List<Claim>
-                {
+                        {
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                };
+                        };
                     foreach (var userRole in userRoles)
                     {
                         authClaims.Add(new Claim(ClaimTypes.Role, userRole));
                     }
-                    var token = GetToken(authClaims);                    
+                    var token = GetToken(authClaims);
                     var roleName = userRoles.FirstOrDefault();
                     if (roleName == UserRoles.Customer)
                     {
@@ -123,6 +123,8 @@ namespace OmanCharts.Controllers
                         loginResponse.Role = roleName;
                         loginResponse.ZoneId = user.ZoneId;
                         loginResponse.Status = true;
+                        loginResponse.Name = user.FullName;
+                        loginResponse.ZoneName = zone.ZoneName;
                         return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = loginResponse });
                     }
                     else
@@ -132,6 +134,8 @@ namespace OmanCharts.Controllers
                         loginResponse.UserId = user.Id;
                         loginResponse.Role = roleName;
                         loginResponse.Status = true;
+                        loginResponse.Name = user.FullName;
+                        loginResponse.ZoneName = "Zones";
                         return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = loginResponse });
                     }
                 }

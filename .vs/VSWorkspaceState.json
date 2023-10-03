@@ -2,12 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\OmanCharts",
-    "\\OmanCharts\\OmanChartsWeb",
-    "\\OmanCharts\\OmanChartsWeb\\Controllers",
-    "\\OmanCharts\\OmanChartsWeb\\Views",
-    "\\OmanCharts\\OmanChartsWeb\\Views\\Home",
-    "\\OmanCharts\\OmanChartsWeb\\Views\\Shared"
+    "\\OmanCharts\\OmanCharts",
+    "\\OmanCharts\\OmanCharts\\Controllers"
   ],
-  "SelectedNode": "\\OmanCharts\\OmanChartsWeb\\Views\\Home\\Index.cshtml",
+  "SelectedNode": "\\OmanCharts\\OmanCharts\\Controllers\\StatisticController.cs",
   "PreviewInSolutionExplorer": false
 }

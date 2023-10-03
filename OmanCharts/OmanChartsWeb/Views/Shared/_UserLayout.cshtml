@@ -36,6 +36,10 @@
     <link href="~/assets/css/custom.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    @{
+        @using Microsoft.AspNetCore.Http;
+        @inject IHttpContextAccessor httpContextAccessor
+    }
     <div id="layout-wrapper">
         <header id="page-topbar">
             <div class="layout-width">
@@ -48,6 +52,7 @@
             <!-- LOGO -->
             <div class="navbar-brand-box">
                 <h3 style="color:#fff; padding-top:10px; padding-bottom:10px;">OPAZ DASHBOARD</h3>
+                <h5 style="color:#fff">@httpContextAccessor.HttpContext.Session.GetString("Name"), @httpContextAccessor.HttpContext.Session.GetString("ZoneName") Zone</h5>
                 <button type="button" class="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover" id="vertical-hover">
                     <i class="ri-record-circle-line"></i>
                 </button>
@@ -88,9 +93,9 @@
         </div>
         <!-- Left Sidebar End -->
         <div class="main-content">
-            <div class="page-content">
+            <div class="page-content" style="padding-top:0px !important">
                 <div class="d-flex justify-content-end">
-                    <img src="~/assets/images/opaz_logo_main1.png" style="max-width:1500px; max-height:300px;" />
+                    <img src="~/assets/images/opaz_logo_main1.png" style="max-width:1500px; max-height:200px;" />
                 </div>
                 <div class="container-fluid">
                     @RenderBody()

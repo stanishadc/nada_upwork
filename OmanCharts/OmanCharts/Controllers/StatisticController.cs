@@ -127,8 +127,29 @@ namespace OmanCharts.Controllers
         [Route("GetDashboard")]
         public async Task<IActionResult> GetDashboard(Guid? UserId, Guid? ZoneId)
         {
+            //Zones
+            var zones = await _context.Zones.ToListAsync();
+
             List<Statistic> data = new List<Statistic>();
-            if(UserId == null || ZoneId == null)
+            //Charts
+            double?[] ProjectSeries = new double?[zones.Count];
+            double?[] LabourSeries = new double?[zones.Count];
+            double?[] ORateSeries = new double?[zones.Count];
+            double?[] InvestorSeries = new double?[zones.Count];
+            string[] Labels = new string[zones.Count];
+            List<string> labelsData = new List<string>();
+            List<double?> seriesProjectsData = new List<double?>();
+            List<double?> seriesLabourData = new List<double?>();
+            List<double?> oRateData = new List<double?>();
+            List<double?> seriesInvesterData = new List<double?>();
+
+            double totalInvestments = 0;
+            double totalProjects = 0;
+            double totalLabour = 0;
+            double totalInvestors = 0;
+
+
+            if (UserId == null || ZoneId == null)
             {
                 data= await _context.tblStatistics.ToListAsync();
             }
@@ -141,33 +162,20 @@ namespace OmanCharts.Controllers
                 //Counts
                 data = data.OrderBy(o => o.LastUpdated).ToList();
                 var lastrecord = data.LastOrDefault();
-                double totalInvestments = (double)(from num in data select num.Investments).Sum();
-                double totalProjects = (double)(from num in data select num.TotalProjects).Sum();
-                double totalLabour = (double)(from num in data select num.TotalLabour).Sum();
-                double totalInvestors = (double)(from num in data select num.TotalInvestors).Sum();
+                totalInvestments = (double)(from num in data select num.Investments).Sum();
+                totalProjects = (double)(from num in data select num.TotalProjects).Sum();
+                totalLabour = (double)(from num in data select num.TotalLabour).Sum();
+                totalInvestors = (double)(from num in data select num.TotalInvestors).Sum();
 
-                //Zones
-                var zones = await _context.Zones.ToListAsync();
-
-                //Charts
-                double?[] ProjectSeries = new double?[zones.Count];
-                double?[] LabourSeries = new double?[zones.Count];
-                double?[] ORateSeries = new double?[zones.Count];
-                double?[] InvestorSeries = new double?[zones.Count];
-                string[] Labels = new string[zones.Count];
-                List<string> labelsData = new List<string>();
-                List<double?> seriesProjectsData = new List<double?>();
-                List<double?> seriesLabourData = new List<double?>();
-                List<double?> oRateData = new List<double?>();
-                List<double?> seriesInvesterData = new List<double?>();
+                
                 foreach (var zone in zones)
                 {
                     labelsData.Add(zone.ZoneName);
                 }
                 foreach (var zone in zones)
                 {
-                    var zcount = await _context.Projects.Where(z => z.ZoneId == zone.ZoneId).ToListAsync();
-                    seriesProjectsData.Add(zcount.Count);
+                    var zcount = (double)(from num in data.Where(z => z.ZoneId == zone.ZoneId) select num.TotalProjects).Sum();
+                    seriesProjectsData.Add(zcount);
                 }
                 foreach (var zone in zones)
                 {
@@ -198,18 +206,18 @@ namespace OmanCharts.Controllers
             return Ok(new
             {
                 StatusCode = HttpStatusCode.OK,
-                ProjectSeries = 0,
-                Labels = 0,
-                LabourSeries = 0,
-                TotalInvestments = 0,
-                TotalProjects = 0,
-                TotalLabour = 0,
-                TotalInvestors = 0,
+                ProjectSeries = ProjectSeries,
+                Labels = Labels,
+                LabourSeries = LabourSeries,
+                InvestorSeries = InvestorSeries,
+                ORateSeries = ORateSeries,
+                TotalInvestments = totalInvestments,
+                TotalProjects = totalProjects,
+                TotalLabour = totalLabour,
+                TotalInvestors = totalInvestors,
                 LastUpdated = DateTime.UtcNow.ToString("MMMM dd, yyyy"),
                 OmanizationRate = 0,
-                ZonesList = 0,
-                InvestorSeries = 0,
-                ORateSeries = 0,
+                ZonesList = zones
             });
         }
         [HttpPost]

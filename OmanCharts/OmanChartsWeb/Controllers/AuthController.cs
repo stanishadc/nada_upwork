@@ -45,6 +45,9 @@ namespace OmanChartsWeb.Controllers
                             HttpContext.Session.SetString("Role", data.Role);
                             HttpContext.Session.SetString("UserId", data.UserId);
                             HttpContext.Session.SetString("ZoneId", data.ZoneId.ToString());
+                            HttpContext.Session.SetString("Name", data.Name);
+                            HttpContext.Session.SetString("ZoneName", data.ZoneName);
+                            ViewBag.Name = data.Name;
                             var routeValue = new RouteValueDictionary(new { action = "Index", controller = "Dashboard" });
                             return RedirectToRoute(routeValue);
                         }

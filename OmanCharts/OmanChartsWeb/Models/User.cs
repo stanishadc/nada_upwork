@@ -37,6 +37,8 @@ namespace OmanChartsWeb.Models
         public string? UserId { get; set; }
         public Guid? ZoneId { get; set; }
         public string? Role { get; set; }
+        public string? Name { get; set; }
+        public string? ZoneName { get; set; }
         public bool Status { get; set; }
     }
     public class Register
