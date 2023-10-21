@@ -3,8 +3,14 @@
     "",
     "\\OmanCharts",
     "\\OmanCharts\\OmanCharts",
+    "\\OmanCharts\\OmanChartsWeb",
+    "\\OmanCharts\\OmanChartsWeb\\Controllers",
+    "\\OmanCharts\\OmanChartsWeb\\Views",
+    "\\OmanCharts\\OmanChartsWeb\\Views\\Project",
+    "\\OmanCharts\\OmanChartsWeb\\Views\\Shared",
+    "\\OmanCharts\\OmanChartsWeb\\Views\\User",
     "\\OmanCharts\\OmanCharts\\Controllers"
   ],
-  "SelectedNode": "\\OmanCharts\\OmanCharts\\Controllers\\StatisticController.cs",
+  "SelectedNode": "\\OmanCharts\\OmanChartsWeb\\Controllers\\HomeController.cs",
   "PreviewInSolutionExplorer": false
 }

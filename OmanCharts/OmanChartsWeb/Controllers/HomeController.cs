@@ -2,7 +2,9 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OmanChartsWeb.Models;
+using System;
 using System.Diagnostics;
+using System.Net.Http;
 using System.Text;
 using System.Xml.Linq;
 using static System.Runtime.InteropServices.JavaScript.JSType;
@@ -24,13 +26,39 @@ namespace OmanChartsWeb.Controllers
                     var apiData = await apiresponse.Content.ReadAsStringAsync();
                     var data = JsonConvert.DeserializeObject<DashBoardStatistic>(apiData);
                     ViewBag.Labels = JsonConvert.SerializeObject(data.Labels);
-                    ViewBag.LabourSeries = JsonConvert.SerializeObject(data.LabourSeries);
+                    int[] aiIntArray = ConvertDoubleArrayToIntArray(data.LabourSeries);
+                    int sum = aiIntArray.Sum();
+                    int[] terms = new int[1];
+                    terms[0]= sum;
+                    ViewBag.LabourSeries = JsonConvert.SerializeObject(terms);
                     ViewBag.ProjectSeries = JsonConvert.SerializeObject(data.ProjectSeries);
                     ViewBag.ORateSeries = JsonConvert.SerializeObject(data.ORateSeries);
                     ViewBag.InvestorSeries = JsonConvert.SerializeObject(data.InvestorSeries);
+                    data.StatisticsList = await GetStatisticsList();
                     return View(data);
                 }
             }
+        }
+
+        private async Task<List<Statistic>> GetStatisticsList()
+        {
+            List<Statistic> lists = new List<Statistic>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Statistic/Get"))
+                {
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
+                    var jObject = JObject.Parse(apiData);
+                    var bids = JArray.Parse(jObject["data"].ToString());
+                    lists = bids.ToObject<List<Statistic>>();
+                }
+            }
+            return lists;
+        }
+
+        public static int[] ConvertDoubleArrayToIntArray(double?[] adDoubleArray)
+        {
+            return adDoubleArray.Select(d => (int)d).ToArray();
         }
         public async Task<IActionResult> Project()
         {

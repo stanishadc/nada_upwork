@@ -32,5 +32,6 @@ namespace OmanChartsWeb.Models
         public double?[] ORateSeries { get; set; }
         public double?[] InvestorSeries { get; set; }
         public List<Zone> ZonesList { get; set; }
+        public List<Statistic> StatisticsList { get; set; }
     }
 }
