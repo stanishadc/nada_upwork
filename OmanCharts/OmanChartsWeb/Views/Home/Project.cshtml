@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Project>
+﻿@model DashBoardStatistic
 
 @{
     ViewData["Title"] = "Projects";
@@ -42,7 +42,7 @@
                         @{
                             int i = 1;
                         }
-                        @foreach (var r in Model)
+                        @foreach (var r in Model.ProjectsList)
                         {
                             <tr>
                                 <td>@i</td>

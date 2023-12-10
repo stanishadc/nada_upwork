@@ -34,6 +34,8 @@ namespace OmanChartsWeb.Models
         public List<Zone> ZonesList { get; set; }
         public List<Statistic> StatisticsList { get; set; }
         public List<StaticZone> StatisticZoneList { get; set; }
+        public List<Project>? ProjectsList { get; set; }
+        public Project? ProjectData {  get; set; }
     }
     public class StaticZone
     {

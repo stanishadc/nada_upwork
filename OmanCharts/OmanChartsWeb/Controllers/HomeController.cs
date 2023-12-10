@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OmanChartsWeb.Models;
 using System.Diagnostics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OmanChartsWeb.Controllers
 {
@@ -98,6 +99,7 @@ namespace OmanChartsWeb.Controllers
         }
         public async Task<IActionResult> Project()
         {
+            DashBoardStatistic dashBoardStatistic = new DashBoardStatistic();
             List<Project> lists = new List<Project>();
             using (var httpClient = new HttpClient())
             {
@@ -109,7 +111,9 @@ namespace OmanChartsWeb.Controllers
                     lists = bids.ToObject<List<Project>>();
                 }
             }
-            return View(lists);
+            dashBoardStatistic.ZonesList = await GetZonesList();
+            dashBoardStatistic.ProjectsList = lists;
+            return View(dashBoardStatistic);
         }
         public async Task<IActionResult> ProjectZone(Guid? Id)
         {
@@ -132,6 +136,7 @@ namespace OmanChartsWeb.Controllers
             {
                 return NotFound();
             }
+            DashBoardStatistic dashBoardStatistic = new DashBoardStatistic();
             using (var httpClient = new HttpClient())
             {
                 using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Project/GetById/" + Id))
@@ -141,9 +146,12 @@ namespace OmanChartsWeb.Controllers
                     var jObject1 = JObject.Parse(apiData);
                     var bids = jObject1["data"].ToString();
                     var data = JsonConvert.DeserializeObject<Project>(bids);
-                    return View(data);
+                    dashBoardStatistic.ProjectData = data;
+                    dashBoardStatistic.ZonesList = await GetZonesList();
                 }
             }
+            
+            return View(dashBoardStatistic);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

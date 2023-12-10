@@ -5,11 +5,11 @@
     "\\OmanCharts\\OmanChartsWeb",
     "\\OmanCharts\\OmanChartsWeb\\Controllers",
     "\\OmanCharts\\OmanChartsWeb\\Views",
+    "\\OmanCharts\\OmanChartsWeb\\Views\\Dashboard",
     "\\OmanCharts\\OmanChartsWeb\\Views\\Home",
     "\\OmanCharts\\OmanChartsWeb\\Views\\Shared",
-    "\\OmanCharts\\OmanChartsWeb\\Views\\User",
-    "\\OmanCharts\\OmanCharts\\Controllers"
+    "\\OmanCharts\\OmanChartsWeb\\Views\\User"
   ],
-  "SelectedNode": "\\OmanCharts\\OmanChartsWeb\\Controllers\\HomeController.cs",
+  "SelectedNode": "\\OmanCharts\\OmanChartsWeb\\Views\\Dashboard\\Index.cshtml",
   "PreviewInSolutionExplorer": false
 }
