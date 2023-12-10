@@ -21,7 +21,8 @@ namespace OmanCharts.Controllers
                               select new
                               {
                                   bs.ZoneId,
-                                  bs.ZoneName
+                                  bs.ZoneName,
+                                  bs.Latitude, bs.Longitude,
                               }).ToListAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }
@@ -33,7 +34,9 @@ namespace OmanCharts.Controllers
                               select new
                               {
                                   bs.ZoneId,
-                                  bs.ZoneName
+                                  bs.ZoneName,
+                                  bs.Latitude,
+                                  bs.Longitude,
                               }).Where(z => z.ZoneId == Id).FirstOrDefaultAsync();
             return StatusCode(StatusCodes.Status200OK, new Response { Status = "Success", Data = data });
         }

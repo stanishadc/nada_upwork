@@ -27,28 +27,6 @@
         var projectchart = new ApexCharts(document.querySelector("#projectchart"), projectoptions);
         projectchart.render();
 
-        var labouroptions = {
-            series: @Html.Raw(ViewBag.LabourSeries),
-            chart: {
-                width: 380,
-                type: 'radialBar',
-            },
-            labels: @Html.Raw(ViewBag.Labels),
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }]
-        };
-        var labourchart = new ApexCharts(document.querySelector("#labourchart"), labouroptions);
-        labourchart.render();
-
         var investorsoptions = {
             series: [{
                 data: @Html.Raw(ViewBag.InvestorSeries)}],
@@ -93,6 +71,25 @@
         };
         var oratechart = new ApexCharts(document.querySelector("#oRatechart"), orateoptions);
         oratechart.render();
+
+        var upadatedonutchart, chartPieBasicColors = getChartColorsArray("labourChart"),
+            chartDonutBasicColors = (chartPieBasicColors && (options = {
+                series: @Html.Raw(ViewBag.ZonesLabour),
+                chart: {
+                    height: 400,
+                    type: "pie"
+                },
+                labels: @Html.Raw(ViewBag.Labels),
+                legend: {
+                    position: "bottom"
+                },
+                dataLabels: {
+                    dropShadow: {
+                        enabled: !1
+                    }
+                },
+                colors: chartPieBasicColors
+            }, (chart = new ApexCharts(document.querySelector("#labourChart"), options)).render()));
     }
 </script>
 <div class="row">
@@ -105,12 +102,12 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Investments</p>
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Zones</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.TotalInvestments)</label> (OMR) </h4>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.ZonesList.Count)</label> </h4>
                                     <a href="" class="text-decoration-underline"><label class="form-label">@Html.DisplayFor(model => model.LastUpdated)</label></a>
                                 </div>
                             </div>
@@ -141,12 +138,12 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div class="flex-grow-1 overflow-hidden">
-                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Omanization Rate</p>
+                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0"> Total Investments</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.OmanizationRate)</label>% </h4>
+                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@Html.DisplayFor(model => model.TotalInvestments)</label> (OMR) </h4>
                                     <a href="" class="text-decoration-underline"><label class="form-label">@Html.DisplayFor(model => model.LastUpdated)</label></a>
                                 </div>
                             </div>
@@ -172,38 +169,19 @@
                     </div><!-- end card -->
                 </div><!-- end col -->
             </div>
-            @* <div class="row">
-            @foreach (var r in Model.ZonesList)
-            {
-            <div class="col-xl-3 col-md-6">
-            <!-- card -->
-            <a asp-action="ProjectZone" asp-controller="Home" asp-route-Id="@r.ZoneId" class="text-decoration-underline">
-            <div class="card card-animate">
-            <div class="card-body">
-            <div class="d-flex align-items-end justify-content-between mt-4">
-
-            <h4 class="fs-22 fw-semibold ff-secondary mb-4"><label class="form-label">@r.ZoneName Zone</label> </h4>
-
-            </div>
-            </div><!-- end card body -->
-            </div><!-- end card -->
-            </a>
-            </div>
-            }
-            </div> *@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header align-items-center d-flex">
-                            <h5 class="card-title mb-0 flex-grow-1">List</h5>
+                            <h5 class="card-title mb-0 flex-grow-1">Total Investments</h5>
                         </div>
                         <div class="card-body">
                             <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Zone</th>
-                                        <th>TotalProjects</th>
-                                        <th>Investements</th>
+                                        <th>Total Projects</th>
+                                        <th>Investments (OMR)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -215,7 +193,7 @@
                                         <tr>
                                             <td>@r.ZoneName</td>
                                             <td>@r.TotalProjects</td>
-                                            <td>@r.Investments</td>
+                                            <td>@r.Investments (OMR)</td>
                                         </tr>
                                         i++;
                                     }
@@ -227,33 +205,23 @@
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="card-title mb-0">Markers</h4>
+                            <h4 class="card-title mb-0">OPAZ Zones</h4>
                         </div><!-- end card header -->
 
-                        <div class="card-body">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7609166.282716599!2d50.85590866949192!3d21.373628129649585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3dd69f66a9d59bbf%3A0x3a064c7665b1a817!2sOman!5e0!3m2!1sen!2sin!4v1697897368177!5m2!1sen!2sin" width="580" height="280" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        <div class="card-body" id="ZoneMap" style="height:320px">
+                            @* <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7609166.282716599!2d50.85590866949192!3d21.373628129649585!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3dd69f66a9d59bbf%3A0x3a064c7665b1a817!2sOman!5e0!3m2!1sen!2sin!4v1697897368177!5m2!1sen!2sin" width="580" height="280" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> *@
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row">
-                @* <div class="col-xl-6">
-                <div class="card card-height-100">
-                <div class="card-header align-items-center d-flex">
-                <h4 class="card-title mb-0 flex-grow-1">Total Projects</h4>
-                </div>
-                <div class="card-body">
-                <div id="projectchart"></div>
-                </div>
-                </div>
-                </div> *@
                 <div class="col-xl-4">
-                    <div class="card card-height-100">
-                        <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Total Labour</h4>
+                    <div class="card">
+                        <div class="card-header">
+                            <h4 class="card-title mb-0">Total Zone Labour</h4>
                         </div>
                         <div class="card-body">
-                            <div id="labourchart"></div>
+                            <div id="labourChart" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
                         </div>
                     </div>
                 </div>
@@ -270,7 +238,7 @@
                 <div class="col-xl-4">
                     <div class="card card-height-100">
                         <div class="card-header align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Omanization Rate</h4>
+                            <h4 class="card-title mb-0 flex-grow-1">Omanization Rate (OMR)</h4>
                         </div>
                         <div class="card-body">
                             <table id="example" class="table table-bordered dt-responsive nowrap table-striped align-middle" style="width:100%">
@@ -279,7 +247,7 @@
                                     {
                                         <tr>
                                             <td>@r.ZoneName</td>
-                                            <td>@r.OmanizationRate</td>
+                                            <td>@r.OmanizationRate (OMR)</td>
                                         </tr>
                                         i++;
                                     }
@@ -292,3 +260,26 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    function initMap() {
+    var map = new google.maps.Map(document.getElementById('ZoneMap'), {
+        center: {
+                lat: 23.61423547903654,
+                lng: 58.46437541099593
+        },
+        zoom: 8
+    });
+    @foreach (var item in Model.ZonesList)
+    {
+        <text>
+                      var marker = new google.maps.Marker({
+                    map: map,
+                    position: { lat: @item.Latitude, lng: @item.Longitude },
+                    title: 'Hello World!'
+                });
+        </text>
+
+    }
+    }
+    </script>

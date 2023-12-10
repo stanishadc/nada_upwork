@@ -26,9 +26,34 @@
         Layout = "_PublicLayout";
     }
 }
-<div class="container p-3 my-3 border">
-    <h4>Details Statistics</h4>
-    <hr />
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Statistics</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><Link>Home</li>
+                    <li class="breadcrumb-item active">Statistics</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+@if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade-show">
+        @TempData["errorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+@if (TempData["successMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade-show">
+        @TempData["successMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+<div class="alert alert-success">
     <form asp-action="Details">
         <div class="row">
             <div class="col-lg-3">

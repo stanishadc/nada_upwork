@@ -385,8 +385,17 @@ namespace OmanCharts.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Latitude")
+                        .IsRequired()
+                        .HasColumnType("varchar(25)");
+
+                    b.Property<string>("Longitude")
+                        .IsRequired()
+                        .HasColumnType("varchar(25)");
+
                     b.Property<string>("ZoneName")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("ZoneId");
 

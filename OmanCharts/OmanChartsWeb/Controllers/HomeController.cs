@@ -2,12 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OmanChartsWeb.Models;
-using System;
 using System.Diagnostics;
-using System.Net.Http;
-using System.Text;
-using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OmanChartsWeb.Controllers
 {
@@ -30,11 +25,16 @@ namespace OmanChartsWeb.Controllers
                     int sum = aiIntArray.Sum();
                     int[] terms = new int[1];
                     terms[0]= sum;
+                    ViewBag.ZonesLabour = JsonConvert.SerializeObject(aiIntArray);
                     ViewBag.LabourSeries = JsonConvert.SerializeObject(terms);
                     ViewBag.ProjectSeries = JsonConvert.SerializeObject(data.ProjectSeries);
                     ViewBag.ORateSeries = JsonConvert.SerializeObject(data.ORateSeries);
                     ViewBag.InvestorSeries = JsonConvert.SerializeObject(data.InvestorSeries);
+                    
                     data.StatisticsList = await GetStatisticsList();
+                    data.ZonesList = await GetZonesList();
+                    //ViewBag.ZonesName = ZonesName;
+                    //ViewBag.ZonesLabour = ZonesIntLabour;
                     return View(data);
                 }
             }
@@ -55,8 +55,44 @@ namespace OmanChartsWeb.Controllers
             }
             return lists;
         }
-
-        public static int[] ConvertDoubleArrayToIntArray(double?[] adDoubleArray)
+        private async Task<List<Zone>> GetZonesList()
+        {
+            List<Zone> lists = new List<Zone>();
+            using (var httpClient = new HttpClient())
+            {
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Zone/Get"))
+                {
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
+                    var jObject = JObject.Parse(apiData);
+                    var bids = JArray.Parse(jObject["data"].ToString());
+                    lists = bids.ToObject<List<Zone>>();
+                }
+            }
+            return lists;
+        }
+        [HttpGet]
+        public async Task<IActionResult> ZoneDetails(Guid Id)
+        {
+            if (Id == null)
+            {
+                return NotFound();
+            }
+            using (var httpClient = new HttpClient())
+            {
+                using (var apiresponse = await httpClient.GetAsync("https://localhost:7089/api/Statistic/GetDashboard?ZoneId=" + Id))
+                {
+                    var apiData = await apiresponse.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject<DashBoardStatistic>(apiData);
+                    ViewBag.Labels = JsonConvert.SerializeObject(data.Labels);
+                    ViewBag.LabourSeries = JsonConvert.SerializeObject(data.LabourSeries);
+                    ViewBag.ProjectSeries = JsonConvert.SerializeObject(data.ProjectSeries);
+                    ViewBag.ORateSeries = JsonConvert.SerializeObject(data.ORateSeries);
+                    ViewBag.InvestorSeries = JsonConvert.SerializeObject(data.InvestorSeries);
+                    return View(data);
+                }
+            }
+        }
+        public static int[] ConvertDoubleArrayToIntArray(double[] adDoubleArray)
         {
             return adDoubleArray.Select(d => (int)d).ToArray();
         }

@@ -2,11 +2,10 @@
   "ExpandedNodes": [
     "",
     "\\OmanCharts",
-    "\\OmanCharts\\OmanCharts",
     "\\OmanCharts\\OmanChartsWeb",
     "\\OmanCharts\\OmanChartsWeb\\Controllers",
     "\\OmanCharts\\OmanChartsWeb\\Views",
-    "\\OmanCharts\\OmanChartsWeb\\Views\\Project",
+    "\\OmanCharts\\OmanChartsWeb\\Views\\Home",
     "\\OmanCharts\\OmanChartsWeb\\Views\\Shared",
     "\\OmanCharts\\OmanChartsWeb\\Views\\User",
     "\\OmanCharts\\OmanCharts\\Controllers"

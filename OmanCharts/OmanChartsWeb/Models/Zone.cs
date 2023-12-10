@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OmanChartsWeb.Models
 {
@@ -6,5 +7,7 @@ namespace OmanChartsWeb.Models
     {
         public Guid ZoneId { get; set; }
         public string? ZoneName { get; set; }
+        public string? Latitude { get; set; }
+        public string? Longitude { get; set; }
     }
 }

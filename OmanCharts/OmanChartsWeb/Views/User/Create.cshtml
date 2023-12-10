@@ -26,62 +26,75 @@
         Layout = "_PublicLayout";
     }
 }
-<div class="container p-3 my-3 border">
-    <h4>Create User</h4>
-    <hr />
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Users</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><Link>Home</li>
+                    <li class="breadcrumb-item active">Create User</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+@if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade-show">
+        @TempData["errorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+@if (TempData["successMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade-show">
+        @TempData["successMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+<div class="alert alert-success">
     <form asp-action="Create">
         <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="zoneId" class="form-label">Zone Id : </label>
                     <select asp-for="ZoneId"
-                            class="form-control"
+                            class="form-select"
                             asp-items="@(new SelectList(Model.ListofZones,"Value", "Text"))">
                     </select>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="companyName" class="form-label">Company Name : </label>
                     <input type="text" name="companyName" class="form-control" placeholder="Company Name" />
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="fullName" class="form-label">Full Name : </label>
                     <input type="text" name="fullName" class="form-control" placeholder="Full Name" />
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="zoneName" class="form-label">Email : </label>
                     <input type="text" name="email" class="form-control" placeholder="Email" />
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="phoneNumber" class="form-label">Phone No : </label>
                     <input type="text" name="phoneNumber" class="form-control" placeholder="Phone Number" />
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="userName" class="form-label">User Name : </label>
                     <input type="text" name="userName" class="form-control" placeholder="User Name" />
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
                     <label htmlFor="password" class="form-label">Password : </label>

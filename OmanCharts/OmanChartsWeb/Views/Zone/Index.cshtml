@@ -41,6 +41,20 @@
         </div>
     </div>
 </div>
+@if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade-show">
+        @TempData["errorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+@if (TempData["successMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade-show">
+        @TempData["successMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
 <div class="alert alert-success">
     <form asp-action="AddZone" method="post">
         <div class="row">
@@ -49,7 +63,19 @@
                     <label htmlFor="zoneName" class="form-label">Zone Name</label>
                     <input type="text" name="zoneName" class="form-control" placeholder="Zone Name" />
                 </div>
-            </div>            
+                </div>
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label htmlFor="Latitude" class="form-label">Latitude : </label>
+                        <input type="text" name="Latitude" class=" form-control" placeholder="Latitude" />
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="mb-3">
+                        <label htmlFor="Longitude" class="form-label">Longitude : </label>
+                        <input type="text" name="Longitude" class=" form-control" placeholder="Longitude" />
+                    </div>
+                </div>
             <div class="col-lg-2">
                 <div class="hstack gap-2 justify-content-end mb-3 mt-4">
                     <button type="submit" class="btn btn-primary">Submit</button>
@@ -71,6 +97,8 @@
                         <tr>
                             <th>SNo.</th>
                             <th>Zone Name</th>
+                            <th>Latitude</th>
+                            <th>Longitude</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -83,6 +111,8 @@
                             <tr>
                                 <td>@i</td>
                                 <td>@r.ZoneName</td>
+                                <td>@r.Latitude</td>
+                                <td>@r.Longitude</td>
                                 <td>
                                     <ul class="list-inline hstack gap-2 mb-0">
                                         <a asp-action="Edit" class="btn btn-primary" asp-route-Id="@r.ZoneId">Edit</a>

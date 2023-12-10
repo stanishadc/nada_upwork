@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using OmanChartsWeb.Models;
 using System.Text;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OmanChartsWeb.Controllers
 {
@@ -39,6 +40,18 @@ namespace OmanChartsWeb.Controllers
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
                     var data = JsonConvert.DeserializeObject<Response>(apiResponse);
+                    if (data != null)
+                    {
+                        if (data.Status == "Success")
+                        {
+                            TempData["successMessage"] = "Zone updated successfully";
+                        }
+                        else
+                        {
+                            TempData["errorMessage"] = "Error in updating record";
+                            return View();
+                        }
+                    }
                 }
             }
             return RedirectToAction("Index");
@@ -78,7 +91,12 @@ namespace OmanChartsWeb.Controllers
                     {
                         if (data.Status == "Success")
                         {
-
+                            TempData["successMessage"] = "Zone created successfully";
+                        }
+                        else
+                        {
+                            TempData["errorMessage"] = "Error in inserting record";
+                            return View("Index");
                         }
                     }
                 }
@@ -93,6 +111,19 @@ namespace OmanChartsWeb.Controllers
                 using (var response = await httpClient.DeleteAsync("https://localhost:7089/api/Zone/Delete?id=" + ZoneId))
                 {
                     string apiResponse = await response.Content.ReadAsStringAsync();
+                    var data = JsonConvert.DeserializeObject<Response>(apiResponse);
+                    if (data != null)
+                    {
+                        if (data.Status == "Success")
+                        {
+                            TempData["successMessage"] = "Zone deleted successfully";
+                        }
+                        else
+                        {
+                            TempData["errorMessage"] = "Error in deleting record";
+                            return View("Index");
+                        }
+                    }
                 }
             }
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OmanCharts.Models;
 using System.Net;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace OmanCharts.Controllers
 {
@@ -136,12 +137,14 @@ namespace OmanCharts.Controllers
             double?[] LabourSeries = new double?[zones.Count];
             double?[] ORateSeries = new double?[zones.Count];
             double?[] InvestorSeries = new double?[zones.Count];
+            double?[] ZoneLabourSeries = new double?[zones.Count];
             string[] Labels = new string[zones.Count];
             List<string> labelsData = new List<string>();
             List<double?> seriesProjectsData = new List<double?>();
             List<double?> seriesLabourData = new List<double?>();
             List<double?> oRateData = new List<double?>();
             List<double?> seriesInvesterData = new List<double?>();
+            List<double?> zoneLabourData = new List<double?>();
 
             double totalInvestments = 0;
             double totalProjects = 0;
@@ -151,11 +154,15 @@ namespace OmanCharts.Controllers
 
             if (UserId == null || ZoneId == null)
             {
-                data= await _context.tblStatistics.ToListAsync();
+                data = await _context.tblStatistics.ToListAsync();
             }
-            else
+            else if (UserId != null)
             {
-                data = await _context.tblStatistics.Where(s => s.UserId == UserId && s.ZoneId == ZoneId).ToListAsync();
+                data = await _context.tblStatistics.Where(s => s.UserId == UserId).ToListAsync();
+            }
+            if(ZoneId != null)
+            {
+                data = data.Where(s => s.ZoneId == ZoneId).ToList();
             }
             if (data.Count > 0)
             {
@@ -219,6 +226,27 @@ namespace OmanCharts.Controllers
                 OmanizationRate = 0,
                 ZonesList = zones
             });
+        }
+        private async Task<List<ZoneLabour>> GetZoneLabour()
+        {
+            List<ZoneLabour> zoneLabours = new List<ZoneLabour>();
+            var data = await (from p in _context.tblStatistics
+                              join z in _context.Zones on p.ZoneId equals z.ZoneId
+                              select new
+                              {
+                                  p.TotalLabour,
+                                  z.ZoneId,
+                                  z.ZoneName,
+                              }).ToListAsync();
+            foreach (var zone in data)
+            {
+                ZoneLabour zoneLabour = new ZoneLabour();
+                zoneLabour.ZoneId = zone.ZoneId;
+                zoneLabour.ZoneName = zone.ZoneName;
+                zoneLabour.TotalLabour = zone.TotalLabour;
+                zoneLabours.Add(zoneLabour);
+            }
+            return zoneLabours;
         }
         [HttpPost]
         [Route("Insert")]

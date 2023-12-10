@@ -27,22 +27,61 @@
         Layout = "_LoginLayout";
     }
 }
-<div class="container p-3 my-3 border">
-    <h4>Update Zone</h4>
-    <hr />
+<div class="row">
+    <div class="col-12">
+        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+            <h4 class="mb-sm-0">Zones</h4>
+            <div class="page-title-right">
+                <ol class="breadcrumb m-0">
+                    <li class="breadcrumb-item"><Link>Home</li>
+                    <li class="breadcrumb-item active">Update</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+@if (TempData["errorMessage"] != null)
+{
+    <div class="alert alert-danger alert-dismissible fade-show">
+        @TempData["errorMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+@if (TempData["successMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade-show">
+        @TempData["successMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"></button>
+    </div>
+}
+<div class="alert alert-success">
     <form asp-action="Update">
         <input type="hidden" asp-for="ZoneId" />
         <div class="row">
             <div class="col-lg-3">
                 <div class="mb-3">
-                    <label htmlFor="zoneName" class="form-label">ZoneName : </label>
+                    <label htmlFor="zoneName" class="form-label">Zone Name : </label>
                     <input type="text" name="zoneName" asp-for="ZoneName" class=" form-control" placeholder="Zone Name" />
                 </div>
             </div>
-        </div>
-        <div>
-            <input class="btn btn-primary" type="submit" value="Update" />
-            <a class="btn btn-danger" asp-action="Index">Back</a>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="Latitude" class="form-label">Latitude : </label>
+                    <input type="text" name="Latitude" asp-for="Latitude" class=" form-control" placeholder="Latitude" />
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="mb-3">
+                    <label htmlFor="Longitude" class="form-label">Longitude : </label>
+                    <input type="text" name="Longitude" asp-for="Longitude" class=" form-control" placeholder="Longitude" />
+                </div>
+            </div>
+            <div class="col-lg-2">
+                <div class="hstack gap-2 justify-content-end mb-3 mt-4">
+                    <input class="btn btn-primary" type="submit" value="Update" />
+                    <a class="btn btn-danger" asp-action="Index">Back</a>
+                </div>
+            </div>
         </div>
     </form>
 </div>

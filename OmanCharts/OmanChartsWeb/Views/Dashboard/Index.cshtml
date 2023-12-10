@@ -26,92 +26,82 @@
 }
 <script type="text/javascript">
     window.onload = function () {
-        var projectoptions = {
-            series: @Html.Raw(ViewBag.ProjectSeries),
-            chart: {
-                width: 380,
-                type: 'pie',
-            },
-            labels: @Html.Raw(ViewBag.Labels),
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
+        var upadatedonutchart, chartPieBasicColors = getChartColorsArray("projectchart"),
+            chartDonutBasicColors = (chartPieBasicColors && (options = {
+                series: @Html.Raw(ViewBag.ProjectSeries),
+                chart: {
+                    height: 300,
+                    type: "pie"
+                },
+                labels: @Html.Raw(ViewBag.Labels),
+                legend: {
+                    position: "bottom"
+                },
+                dataLabels: {
+                    dropShadow: {
+                        enabled: !1
                     }
-                }
-            }]
-        };
-        var projectchart = new ApexCharts(document.querySelector("#projectchart"), projectoptions);
-        var labouroptions = {
-            series: @Html.Raw(ViewBag.LabourSeries),
-            chart: {
-                width: 380,
-                type: 'pie',
-            },
-            labels: @Html.Raw(ViewBag.Labels),
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }]
-        };
-        var labourchart = new ApexCharts(document.querySelector("#labourchart"), labouroptions);
-        projectchart.render();
-        labourchart.render();
+                },
+                colors: chartPieBasicColors
+            }, (chart = new ApexCharts(document.querySelector("#projectchart"), options)).render()));
 
-        var investorsoptions = {
-            series: @Html.Raw(ViewBag.InvestorSeries),
-            chart: {
-                width: 380,
-                type: 'pie',
-            },
-            labels: @Html.Raw(ViewBag.Labels),
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
-                    }
-                }
-            }]
-        };
-        var investorchart = new ApexCharts(document.querySelector("#investorschart"), investorsoptions);
-        investorchart.render();
 
-        var orateoptions = {
-            series: @Html.Raw(ViewBag.ORateSeries),
-            chart: {
-                width: 380,
-                type: 'pie',
-            },
-            labels: @Html.Raw(ViewBag.Labels),
-            responsive: [{
-                breakpoint: 480,
-                options: {
-                    chart: {
-                        width: 200
-                    },
-                    legend: {
-                        position: 'bottom'
+        var upadatedonutchart, chartPieBasicColors = getChartColorsArray("labourchart"),
+            chartDonutBasicColors = (chartPieBasicColors && (options = {
+                series: @Html.Raw(ViewBag.LabourSeries),
+                chart: {
+                    height: 300,
+                    type: "pie"
+                },
+                labels: @Html.Raw(ViewBag.Labels),
+                legend: {
+                    position: "bottom"
+                },
+                dataLabels: {
+                    dropShadow: {
+                        enabled: !1
                     }
-                }
-            }]
-        };
-        var oratechart = new ApexCharts(document.querySelector("#oRatechart"), orateoptions);
-        oratechart.render();
+                },
+                colors: chartPieBasicColors
+            }, (chart = new ApexCharts(document.querySelector("#labourchart"), options)).render()));
+
+        var upadatedonutchart, chartPieBasicColors = getChartColorsArray("investorschart"),
+            chartDonutBasicColors = (chartPieBasicColors && (options = {
+                series: @Html.Raw(ViewBag.InvestorSeries),
+                chart: {
+                    height: 300,
+                    type: "pie"
+                },
+                labels: @Html.Raw(ViewBag.Labels),
+                legend: {
+                    position: "bottom"
+                },
+                dataLabels: {
+                    dropShadow: {
+                        enabled: !1
+                    }
+                },
+                colors: chartPieBasicColors
+            }, (chart = new ApexCharts(document.querySelector("#investorschart"), options)).render()));
+
+        var upadatedonutchart, chartPieBasicColors = getChartColorsArray("oRatechart"),
+            chartDonutBasicColors = (chartPieBasicColors && (options = {
+                series: @Html.Raw(ViewBag.ORateSeries),
+                chart: {
+                    height: 300,
+                    type: "pie"
+                },
+                labels: @Html.Raw(ViewBag.Labels),
+                legend: {
+                    position: "bottom"
+                },
+                dataLabels: {
+                    dropShadow: {
+                        enabled: !1
+                    }
+                },
+                colors: chartPieBasicColors
+            }, (chart = new ApexCharts(document.querySelector("#oRatechart"), options)).render()));
     }
 </script>
 <div class="row">
@@ -195,7 +185,7 @@
                 <h4 class="card-title mb-0 flex-grow-1">Total Projects</h4>
             </div>
             <div class="card-body">
-                <div id="projectchart"></div>
+                <div id="projectchart" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
             </div>
         </div>
     </div>
@@ -205,7 +195,7 @@
                 <h4 class="card-title mb-0 flex-grow-1">Total Labour</h4>
             </div>
             <div class="card-body">
-                <div id="labourchart"></div>
+                <div id="labourchart" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
             </div>
         </div>
     </div>
@@ -215,7 +205,7 @@
                 <h4 class="card-title mb-0 flex-grow-1">Total Investors</h4>
             </div>
             <div class="card-body">
-                <div id="investorschart"></div>
+                <div id="investorschart" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
             </div>
         </div>
     </div>
@@ -225,7 +215,7 @@
                 <h4 class="card-title mb-0 flex-grow-1">Omanization Rate</h4>
             </div>
             <div class="card-body">
-                <div id="oRatechart"></div>
+                <div id="oRatechart" data-colors='["--vz-primary", "--vz-success", "--vz-warning", "--vz-danger", "--vz-info"]' class="apex-charts" dir="ltr"></div>
             </div>
         </div>
     </div>
